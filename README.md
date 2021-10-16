@@ -5,7 +5,7 @@
 Библиотека для сервиса "Мой склад" JSON API 1.1. Некоторые примеры можно найти в "tests". Все ещё далека от завершения.
 
 ## Установка<br />
-    composer require tooyz/moysklad
+    composer require totalcrm/moysklad-php-sdk
     
 **Запуск тестов:**<br />
     1) composer global require phpunit/phpunit<br />
