@@ -1,6 +1,6 @@
 {
     "name": "totalcrm/moysklad-php-sdk",
-    "description": "Get it here: https://github.com/Tooyz/moysklad",
+    "description": "Get it here: https://github.com/totalcrm/moysklad-php-sdk",
     "require": {
         "php": ">=7.0",
         "guzzlehttp/guzzle": "^6.2.1"
