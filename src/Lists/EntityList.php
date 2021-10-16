@@ -1,19 +1,20 @@
 <?php
 
-namespace MoySklad\Lists;
+namespace TotalCRM\MoySklad\Lists;
 
-use MoySklad\Components\Fields\MetaField;
-use MoySklad\Components\MassRequest;
-use MoySklad\Entities\AbstractEntity;
-use MoySklad\MoySklad;
-use MoySklad\Traits\AccessesSkladInstance;
+use TotalCRM\MoySklad\Components\Fields\MetaField;
+use TotalCRM\MoySklad\Components\MassRequest;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\MoySklad;
+use TotalCRM\MoySklad\Traits\AccessesSkladInstance;
 
 /**
  * List of entity objects
  * Class EntityList
  * @package MoySklad\Lists
  */
-class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate, \Countable {
+class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate, \Countable
+{
     use AccessesSkladInstance;
 
     /**
@@ -34,33 +35,39 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      * Replace internal array
      * @param $items
      */
-    public function replaceItems($items){
-        if ( $items instanceof EntityList ){
+    public function replaceItems($items)
+    {
+        if ($items instanceof EntityList) {
             $this->items = $items->toArray();
-        } else if ( !is_array($items) ) {
+        } else if (!is_array($items)) {
             $this->items = [$items];
         } else {
             $this->items = $items;
         }
     }
 
-    public function replaceAttributes($attributes){
+    public function replaceAttributes($attributes)
+    {
         $this->attributes = $attributes;
     }
 
-    public function setAttribute($key, $value){
+    public function setAttribute($key, $value)
+    {
         $this->attributes->{$key} = $value;
     }
 
-    public function getAttribute($key){
+    public function getAttribute($key)
+    {
         return $this->attributes->{$key};
     }
 
-    public function getMeta(){
-        return isset($this->attributes->meta)?$this->attributes->meta:null;
+    public function getMeta()
+    {
+        return isset($this->attributes->meta) ? $this->attributes->meta : null;
     }
 
-    public function getAttributes(){
+    public function getAttributes()
+    {
         return $this->attributes;
     }
 
@@ -69,7 +76,8 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      * @param callable $cb
      * @return EntityList $this
      */
-    public function each(callable $cb){
+    public function each(callable $cb)
+    {
         foreach ($this->items as $key => $item) {
             if ($cb($item, $key) === false) {
                 break;
@@ -79,39 +87,43 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
     }
 
     /**
-     * @see array_merge
      * @param EntityList $list
      * @return static
+     * @see array_merge
      */
-    public function merge(EntityList $list){
+    public function merge(EntityList $list)
+    {
         return new static($this->getSkladInstance(), array_merge($this->items, $list->toArray()));
     }
 
     /**
-     * @see array_map
      * @param callable $cb
      * @return static
+     * @see array_map
      */
-    public function map(callable $cb){
+    public function map(callable $cb)
+    {
         return new static($this->getSkladInstance(), array_map($cb, $this->items));
     }
 
     /**
-     * @see array_filter
      * @param callable $cb
      * @return static
+     * @see array_filter
      */
-    public function filter(callable $cb){
+    public function filter(callable $cb)
+    {
         return new static($this->getSkladInstance(), array_filter($this->items, $cb));
     }
 
     /**
-     * @see array_reduce
      * @param callable $cb
      * @param null $initial
      * @return mixed
+     * @see array_reduce
      */
-    public function reduce(callable $cb, $initial = null){
+    public function reduce(callable $cb, $initial = null)
+    {
         return array_reduce($this->items, $cb, $initial);
     }
 
@@ -120,8 +132,9 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      * @param $targetClass
      * @return $this
      */
-    public function transformItemsToClass($targetClass){
-        $this->items = array_map(function(AbstractEntity $e) use($targetClass){
+    public function transformItemsToClass($targetClass)
+    {
+        $this->items = array_map(function (AbstractEntity $e) use ($targetClass) {
             return $e->transformToClass($targetClass);
         }, $this->items);
         return $this;
@@ -131,8 +144,9 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      * Transform stored items into theirs entity class defined in meta
      * @return $this
      */
-    public function transformItemsToMetaClass(){
-        $this->items = array_map(function(AbstractEntity $e){
+    public function transformItemsToMetaClass()
+    {
+        $this->items = array_map(function (AbstractEntity $e) {
             return $e->transformToMetaClass();
         }, $this->items);
         return $this;
@@ -142,7 +156,8 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      * Runs batch creation with stored items
      * @return $this
      */
-    public function massCreate(){
+    public function massCreate()
+    {
         $mr = new MassRequest($this->getSkladInstance(), $this->items);
         $this->items = $mr->create()->toArray();
         return $this;
@@ -152,7 +167,8 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      * Get iterator with stored items
      * @return \Iterator
      */
-    public function getIterator(){
+    public function getIterator()
+    {
         return new ListIterator($this->items);
     }
 
@@ -160,44 +176,49 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      * Add item to list
      * @param AbstractEntity $entity
      */
-    public function push(AbstractEntity $entity){
+    public function push(AbstractEntity $entity)
+    {
         $this->items[] = $entity;
     }
 
     /**
-     * @see array_shift
      * @return mixed
+     * @see array_shift
      */
-    public function shift(){
+    public function shift()
+    {
         return array_shift($this->items);
     }
 
     /**
-     * @see array_unshift
      * @param $var
      * @param null $_
      * @return int
+     * @see array_unshift
      */
-    public function unshift($var, $_ = null){
+    public function unshift($var, $_ = null)
+    {
         return array_unshift($this->items, $var, $_);
     }
 
     /**
-     * @see array_pop
      * @return mixed
+     * @see array_pop
      */
-    public function pop(){
+    public function pop()
+    {
         return array_pop($this->items);
     }
 
     /**
-     * @see array_splice
      * @param $offset
      * @param null $length
      * @param null $replacement
      * @return array
+     * @see array_splice
      */
-    public function splice($offset, $length = null, $replacement = null){
+    public function splice($offset, $length = null, $replacement = null)
+    {
         return array_splice($this->items, $offset, $length, $replacement);
     }
 
@@ -206,7 +227,8 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      * @param $key
      * @return AbstractEntity
      */
-    public function get($key){
+    public function get($key)
+    {
         return $this->items[$key];
     }
 
@@ -216,7 +238,8 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      * @param $value
      * @return $this
      */
-    public function set($key, $value){
+    public function set($key, $value)
+    {
         $this->items[$key] = $value;
         return $this;
     }
@@ -225,7 +248,8 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      * Count stored objects
      * @return int
      */
-    public function count(){
+    public function count()
+    {
         return count($this->items);
     }
 
@@ -233,7 +257,8 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      * Get internal array
      * @return array
      */
-    public function toArray(){
+    public function toArray()
+    {
         return $this->items;
     }
 
@@ -242,7 +267,8 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      * @param $options
      * @return string
      */
-    public function toJson($options){
+    public function toJson($options)
+    {
         return json_encode($this->jsonSerialize(), $options);
     }
 
@@ -277,7 +303,7 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
         /**
          * @var AbstractEntity $item
          */
-        foreach ($this->items as $item){
+        foreach ($this->items as $item) {
             $newItems[] = clone $item;
         }
         $this->replaceItems($newItems);

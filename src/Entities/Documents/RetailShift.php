@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities\Documents;
+namespace TotalCRM\MoySklad\Entities\Documents;
 
-class RetailShift extends AbstractDocument{
+class RetailShift extends AbstractDocument
+{
     public static $entityName = 'retailshift';
 }

@@ -1,15 +1,16 @@
 <?php
 
-namespace MoySklad\Components\Fields;
+namespace TotalCRM\MoySklad\Components\Fields;
 
-use MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
 
 /**
  * Class for storing different fields
  * Class AbstractFieldAccessor
  * @package MoySklad\Components\Fields
  */
-abstract class AbstractFieldAccessor implements \JsonSerializable {
+abstract class AbstractFieldAccessor implements \JsonSerializable
+{
     protected $storage;
     /**
      * @var AbstractEntity
@@ -27,10 +28,11 @@ abstract class AbstractFieldAccessor implements \JsonSerializable {
      * Replace fields with new
      * @param $fields
      */
-    public function replace($fields){
+    public function replace($fields)
+    {
         $this->storage = new \stdClass();
-        if ( $fields instanceof static ) $fields = $fields->getInternal();
-        foreach ( $fields as $fieldName => $field ){
+        if ($fields instanceof static) $fields = $fields->getInternal();
+        foreach ($fields as $fieldName => $field) {
             $this->storage->{$fieldName} = $field;
         }
     }
@@ -38,11 +40,13 @@ abstract class AbstractFieldAccessor implements \JsonSerializable {
     /**
      * @return \stdClass
      */
-    public function getInternal(){
+    public function getInternal()
+    {
         return $this->storage;
     }
 
-    public function deleteKey($key){
+    public function deleteKey($key)
+    {
         unset($this->storage->{$key});
     }
 

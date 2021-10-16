@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities\Documents\Factures;
+namespace TotalCRM\MoySklad\Entities\Documents\Factures;
 
-class FactureOut extends AbstractFacture {
+class FactureOut extends AbstractFacture
+{
     public static $entityName = 'factureout';
 }

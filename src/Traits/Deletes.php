@@ -1,14 +1,14 @@
 <?php
 
-namespace MoySklad\Traits;
+namespace TotalCRM\MoySklad\Traits;
 
-use MoySklad\Entities\AbstractEntity;
-use MoySklad\Exceptions\ApiResponseException;
-use MoySklad\Exceptions\EntityHasNoIdException;
-use MoySklad\Registers\ApiUrlRegistry;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Exceptions\ApiResponseException;
+use TotalCRM\MoySklad\Exceptions\EntityHasNoIdException;
+use TotalCRM\MoySklad\Registers\ApiUrlRegistry;
 
-trait Deletes{
-
+trait Deletes
+{
 
     /**
      * Delete entity, throws exception if not found
@@ -16,12 +16,13 @@ trait Deletes{
      * @return bool
      * @throws EntityHasNoIdException
      */
-    public function delete($getIdFromMeta = false){
+    public function delete($getIdFromMeta = false)
+    {
         /**
          * @var AbstractEntity $this
          */
-        if ( empty($this->fields->id) ){
-            if ( !$getIdFromMeta || !$id = $this->getMeta()->getId()) throw new EntityHasNoIdException($this);
+        if (empty($this->fields->id)) {
+            if (!$getIdFromMeta || !$id = $this->getMeta()->getId()) throw new EntityHasNoIdException($this);
         } else {
             $id = $this->id;
         }

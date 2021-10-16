@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities;
+namespace TotalCRM\MoySklad\Entities;
 
-class Counterparty extends AbstractEntity{
+class Counterparty extends AbstractEntity
+{
     public static $entityName = 'counterparty';
 }

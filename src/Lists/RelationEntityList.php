@@ -1,18 +1,19 @@
 <?php
 
-namespace MoySklad\Lists;
+namespace TotalCRM\MoySklad\Lists;
 
-use MoySklad\Components\Fields\MetaField;
-use MoySklad\Components\Query\RelationQuery;
-use MoySklad\MoySklad;
-use MoySklad\Registers\ApiUrlRegistry;
+use TotalCRM\MoySklad\Components\Fields\MetaField;
+use TotalCRM\MoySklad\Components\Query\RelationQuery;
+use TotalCRM\MoySklad\MoySklad;
+use TotalCRM\MoySklad\Registers\ApiUrlRegistry;
 
 /**
  * EntityList with meta. Used for query
  * Class RelationEntityList
  * @package MoySklad\Lists
  */
-class RelationEntityList extends EntityList{
+class RelationEntityList extends EntityList
+{
     /**
      * @var null|MetaField
      */
@@ -24,17 +25,19 @@ class RelationEntityList extends EntityList{
         $this->meta = $metaField;
     }
 
-    public function setMeta(MetaField $metaField){
+    public function setMeta(MetaField $metaField)
+    {
         $this->meta = $metaField;
     }
 
     /**
      * Get RelationListQuery object which van be used for getting, filtering and searching lists defined in meta
-     * @see ListQuery
      * @return RelationQuery
      * @throws \MoySklad\Exceptions\UnknownEntityException
+     * @see ListQuery
      */
-    public function query(){
+    public function query()
+    {
         $relHref = $this->meta->parseRelationHref();
         $sklad = $this->getSkladInstance();
         $res = new RelationQuery($sklad, $this->meta->getClass());
@@ -45,30 +48,33 @@ class RelationEntityList extends EntityList{
     }
 
     /**
-     * @see EntityList::merge()
      * @param EntityList $list
      * @return static
+     * @see EntityList::merge()
      */
-    public function merge(EntityList $list){
+    public function merge(EntityList $list)
+    {
         return new static($this->getSkladInstance(), array_merge($this->items, $list->toArray()), $this->meta);
     }
 
     /**
-     * @see EntityList::map()
      * @param callable $cb
      * @return static
+     * @see EntityList::map()
      */
-    public function map(callable $cb){
+    public function map(callable $cb)
+    {
         return new static($this->getSkladInstance(), array_map($cb, $this->items), $this->meta);
     }
 
 
     /**
-     * @see EntityList::filter()
      * @param callable $cb
      * @return static
+     * @see EntityList::filter()
      */
-    public function filter(callable $cb){
+    public function filter(callable $cb)
+    {
         return new static($this->getSkladInstance(), array_filter($this->items, $cb), $this->meta);
     }
 }

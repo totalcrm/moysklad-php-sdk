@@ -1,11 +1,11 @@
 <?php
 
-namespace MoySklad\Traits;
+namespace TotalCRM\MoySklad\Traits;
 
+use TotalCRM\MoySklad\MoySklad;
 
-use MoySklad\MoySklad;
-
-trait AccessesSkladInstance{
+trait AccessesSkladInstance
+{
     /**
      * @var string
      */
@@ -15,7 +15,8 @@ trait AccessesSkladInstance{
      * Get MoySklad instance used for constructing entity
      * @return MoySklad
      */
-    public function getSkladInstance(){
+    public function getSkladInstance()
+    {
         return MoySklad::findInstanceByHash($this->skladHashCode);
     }
 }

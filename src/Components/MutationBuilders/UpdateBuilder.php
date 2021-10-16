@@ -1,12 +1,13 @@
 <?php
 
-namespace MoySklad\Components\MutationBuilders;
+namespace TotalCRM\MoySklad\Components\MutationBuilders;
 
-use MoySklad\Entities\AbstractEntity;
-use MoySklad\Exceptions\EntityHasNoIdException;
-use MoySklad\Registers\ApiUrlRegistry;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Exceptions\EntityHasNoIdException;
+use TotalCRM\MoySklad\Registers\ApiUrlRegistry;
 
-class UpdateBuilder extends AbstractMutationBuilder {
+class UpdateBuilder extends AbstractMutationBuilder
+{
     /**
      * Update entity with current fields
      * @return AbstractEntity

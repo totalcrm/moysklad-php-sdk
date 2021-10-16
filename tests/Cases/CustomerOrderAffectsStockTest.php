@@ -2,17 +2,17 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Components\FilterQuery;
-use MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
-use MoySklad\Entities\Assortment;
-use MoySklad\Entities\Counterparty;
-use MoySklad\Entities\Documents\Movements\Enter;
-use MoySklad\Entities\Documents\Orders\CustomerOrder;
-use MoySklad\Entities\Organization;
-use MoySklad\Entities\Products\Product;
-use MoySklad\Entities\Store;
-use MoySklad\Lists\EntityList;
-use MoySklad\MoySklad;
+use TotalCRM\MoySklad\Components\FilterQuery;
+use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
+use TotalCRM\MoySklad\Entities\Assortment;
+use TotalCRM\MoySklad\Entities\Counterparty;
+use TotalCRM\MoySklad\Entities\Documents\Movements\Enter;
+use TotalCRM\MoySklad\Entities\Documents\Orders\CustomerOrder;
+use TotalCRM\MoySklad\Entities\Organization;
+use TotalCRM\MoySklad\Entities\Products\Product;
+use TotalCRM\MoySklad\Entities\Store;
+use TotalCRM\MoySklad\Lists\EntityList;
+use TotalCRM\MoySklad\MoySklad;
 use Tests\Config;
 
 require_once "TestCase.php";

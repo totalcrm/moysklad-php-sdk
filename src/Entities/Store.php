@@ -1,10 +1,11 @@
 <?php
 
-namespace MoySklad\Entities;
+namespace TotalCRM\MoySklad\Entities;
 
-use MoySklad\Traits\RequiresOnlyNameForCreation;
+use TotalCRM\MoySklad\Traits\RequiresOnlyNameForCreation;
 
-class Store extends AbstractEntity{
+class Store extends AbstractEntity
+{
     use RequiresOnlyNameForCreation;
     public static $entityName = 'store';
 }

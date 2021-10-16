@@ -1,10 +1,11 @@
 <?php
 
-namespace MoySklad\Entities\Documents\Factures;
+namespace TotalCRM\MoySklad\Entities\Documents\Factures;
 
-use MoySklad\Entities\Documents\AbstractDocument;
-use MoySklad\Interfaces\DoesNotSupportMutationInterface;
+use TotalCRM\MoySklad\Entities\Documents\AbstractDocument;
+use TotalCRM\MoySklad\Interfaces\DoesNotSupportMutationInterface;
 
-class AbstractFacture extends AbstractDocument implements DoesNotSupportMutationInterface {
+class AbstractFacture extends AbstractDocument implements DoesNotSupportMutationInterface
+{
     public static $entityName = 'a_facture';
 }

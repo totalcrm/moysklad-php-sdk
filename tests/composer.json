@@ -1,5 +1,5 @@
 {
-    "name": "tooyz/moysklad_tests",
+    "name": "totalcrm/moysklad-php-sdk_tests",
     "require": {
         "illuminate/support": "^5.3",
         "phpunit/phpunit": "^5.5",
@@ -7,13 +7,13 @@
     },
     "authors": [
         {
-            "name": "Tooyz",
-            "email": "tooy_m@mail.ru"
+            "name": "totalcrm",
+            "email": "info@totalcrm.ru"
         }
     ],
     "autoload": {
         "psr-4": {
-            "MoySklad\\": "cases/"
+            "TotalCRM\\MoySklad\\": "cases/"
         }
     }
 }

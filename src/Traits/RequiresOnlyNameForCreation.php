@@ -1,8 +1,9 @@
 <?php
 
-namespace MoySklad\Traits;
+namespace TotalCRM\MoySklad\Traits;
 
-trait RequiresOnlyNameForCreation{
+trait RequiresOnlyNameForCreation
+{
     public static function getFieldsRequiredForCreation()
     {
         return ["name"];

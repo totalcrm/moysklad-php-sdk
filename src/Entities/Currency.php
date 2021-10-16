@@ -1,11 +1,13 @@
 <?php
 
-namespace MoySklad\Entities;
+namespace TotalCRM\MoySklad\Entities;
 
-class Currency extends AbstractEntity{
+class Currency extends AbstractEntity
+{
     public static $entityName = 'currency';
 
-    public static function getFieldsRequiredForCreation(){
+    public static function getFieldsRequiredForCreation()
+    {
         return ["name", "code", "isoCode"];
     }
 }

@@ -1,12 +1,14 @@
 <?php
 
-namespace MoySklad\Entities\Documents\Movements;
+namespace TotalCRM\MoySklad\Entities\Documents\Movements;
 
-use MoySklad\Entities\Organization;
-use MoySklad\Entities\Store;
+use TotalCRM\MoySklad\Entities\Organization;
+use TotalCRM\MoySklad\Entities\Store;
 
-class Enter extends AbstractMovement {
+class Enter extends AbstractMovement
+{
     public static $entityName = 'enter';
+
     public static function getFieldsRequiredForCreation()
     {
         return ['name', Organization::$entityName, Store::$entityName];

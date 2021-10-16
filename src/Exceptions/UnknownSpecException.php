@@ -1,6 +1,6 @@
 <?php
 
-namespace MoySklad\Exceptions;
+namespace TotalCRM\MoySklad\Exceptions;
 
 use \Exception;
 
@@ -9,11 +9,12 @@ use \Exception;
  * Class UnknownSpecException
  * @package MoySklad\Exceptions
  */
-class UnknownSpecException extends Exception{
+class UnknownSpecException extends Exception
+{
     public function __construct($spec = '', $code = 0, Exception $previous = null)
     {
         parent::__construct(
-            'Unknown spec "'.$spec.'"',
+            'Unknown spec "' . $spec . '"',
             $code,
             $previous);
     }

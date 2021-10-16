@@ -1,10 +1,11 @@
 <?php
 
-namespace MoySklad\Entities\Products;
+namespace TotalCRM\MoySklad\Entities\Products;
 
-use MoySklad\Entities\Misc\Characteristics;
+use TotalCRM\MoySklad\Entities\Misc\Characteristics;
 
-class Variant extends AbstractProduct{
+class Variant extends AbstractProduct
+{
     public static $entityName = 'variant';
 
     public static function getFieldsRequiredForCreation()

@@ -2,7 +2,7 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Entities\Misc\Webhook;
+use TotalCRM\MoySklad\Entities\Misc\Webhook;
 
 require_once "TestCase.php";
 

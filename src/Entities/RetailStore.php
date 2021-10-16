@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities;
+namespace TotalCRM\MoySklad\Entities;
 
-class RetailStore extends AbstractEntity{
+class RetailStore extends AbstractEntity
+{
     public static $entityName = 'retailstore';
 }

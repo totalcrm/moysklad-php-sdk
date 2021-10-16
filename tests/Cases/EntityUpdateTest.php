@@ -2,12 +2,12 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Entities\AbstractEntity;
-use MoySklad\Entities\Assortment;
-use MoySklad\Entities\Group;
-use MoySklad\Entities\Products\Product;
-use MoySklad\Entities\Products\Service;
-use MoySklad\Lists\EntityList;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Entities\Assortment;
+use TotalCRM\MoySklad\Entities\Group;
+use TotalCRM\MoySklad\Entities\Products\Product;
+use TotalCRM\MoySklad\Entities\Products\Service;
+use TotalCRM\MoySklad\Lists\EntityList;
 
 require_once "TestCase.php";
 

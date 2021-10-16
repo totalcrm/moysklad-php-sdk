@@ -1,10 +1,11 @@
 <?php
 
-namespace MoySklad\Entities\Misc;
+namespace TotalCRM\MoySklad\Entities\Misc;
 
-use MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
 
-class Export extends AbstractEntity  {
+class Export extends AbstractEntity
+{
     public static $entityName = 'export';
 
     public static function getFieldsRequiredForCreation()
@@ -12,7 +13,8 @@ class Export extends AbstractEntity  {
         return ["extension"];
     }
 
-    public function getFileLink(){
+    public function getFileLink()
+    {
         return $this->fields->file;
     }
 }

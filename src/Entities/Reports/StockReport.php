@@ -1,19 +1,22 @@
 <?php
 
-namespace MoySklad\Entities\Reports;
+namespace TotalCRM\MoySklad\Entities\Reports;
 
-use MoySklad\Components\Specs\QuerySpecs\Reports\StockReportQuerySpecs;
-use MoySklad\Entities\Documents\AbstractDocument;
-use MoySklad\MoySklad;
+use TotalCRM\MoySklad\Components\Specs\QuerySpecs\Reports\StockReportQuerySpecs;
+use TotalCRM\MoySklad\Entities\Documents\AbstractDocument;
+use TotalCRM\MoySklad\MoySklad;
 
-class StockReport extends AbstractReport  {
+class StockReport extends AbstractReport
+{
     public static $reportName = 'stock';
 
-    public static function all(MoySklad $sklad, StockReportQuerySpecs $specs = null){
+    public static function all(MoySklad $sklad, StockReportQuerySpecs $specs = null)
+    {
         return static::queryWithParam($sklad, 'all', $specs);
     }
 
-    public static function byStore(MoySklad $sklad, StockReportQuerySpecs $specs = null){
+    public static function byStore(MoySklad $sklad, StockReportQuerySpecs $specs = null)
+    {
         return static::queryWithParam($sklad, 'bystore', $specs);
     }
 
@@ -22,7 +25,8 @@ class StockReport extends AbstractReport  {
      * @param AbstractDocument $operation
      * @return \stdClass
      */
-    public static function byOperation(MoySklad $sklad, AbstractDocument $operation){
+    public static function byOperation(MoySklad $sklad, AbstractDocument $operation)
+    {
         return static::queryWithParam($sklad, 'byoperation', StockReportQuerySpecs::create([
             'operation.id' => $operation->getMeta()->getId()
         ]));

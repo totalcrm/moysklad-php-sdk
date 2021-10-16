@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities;
+namespace TotalCRM\MoySklad\Entities;
 
-class Bonusprogram extends AbstractEntity{
+class Bonusprogram extends AbstractEntity
+{
     public static $entityName = 'bonusprogram';
 }

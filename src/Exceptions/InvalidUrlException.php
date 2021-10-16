@@ -1,6 +1,6 @@
 <?php
 
-namespace MoySklad\Exceptions;
+namespace TotalCRM\MoySklad\Exceptions;
 
 use \Exception;
 
@@ -9,7 +9,8 @@ use \Exception;
  * Class InvalidUrlException
  * @package MoySklad\Exceptions
  */
-class InvalidUrlException extends Exception{
+class InvalidUrlException extends Exception
+{
     public function __construct($url, $code = 0, Exception $previous = null)
     {
         parent::__construct(

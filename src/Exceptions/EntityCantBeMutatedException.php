@@ -1,11 +1,12 @@
 <?php
 
-namespace MoySklad\Exceptions;
+namespace TotalCRM\MoySklad\Exceptions;
 
 use \Exception;
-use MoySklad\Interfaces\DoesNotSupportMutationInterface;
+use TotalCRM\MoySklad\Interfaces\DoesNotSupportMutationInterface;
 
-class EntityCantBeMutatedException extends Exception{
+class EntityCantBeMutatedException extends Exception
+{
     public function __construct(DoesNotSupportMutationInterface $entity, $code = 0, Exception $previous = null)
     {
         parent::__construct(

@@ -1,12 +1,13 @@
 <?php
 
-namespace MoySklad\Entities\Pos;
+namespace TotalCRM\MoySklad\Entities\Pos;
 
-use MoySklad\Components\Http\RequestConfig;
-use MoySklad\Interfaces\DoesNotSupportMutationInterface;
-use MoySklad\Registers\ApiUrlRegistry;
+use TotalCRM\MoySklad\Components\Http\RequestConfig;
+use TotalCRM\MoySklad\Interfaces\DoesNotSupportMutationInterface;
+use TotalCRM\MoySklad\Registers\ApiUrlRegistry;
 
-class RetailStore extends PosEntity implements DoesNotSupportMutationInterface{
+class RetailStore extends PosEntity implements DoesNotSupportMutationInterface
+{
     public static $entityName = 'retailstore';
 
     public static function boot()
@@ -19,7 +20,8 @@ class RetailStore extends PosEntity implements DoesNotSupportMutationInterface{
      * @return \stdClass
      * @throws \Throwable
      */
-    public function getAuthToken(){
+    public function getAuthToken()
+    {
         return $this->getSkladInstance()->getClient()->post(
             ApiUrlRegistry::instance()->getPosAttachTokenUrl($this->id),
             null,

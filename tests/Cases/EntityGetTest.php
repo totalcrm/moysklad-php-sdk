@@ -2,19 +2,19 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Components\Expand;
-use MoySklad\Components\FilterQuery;
-use MoySklad\Components\Http\RequestLog;
-use MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
-use MoySklad\Entities\AbstractEntity;
-use MoySklad\Entities\Assortment;
-use MoySklad\Entities\Documents\Movements\Demand;
-use MoySklad\Entities\Employee;
-use MoySklad\Entities\Folders\ProductFolder;
-use MoySklad\Entities\Group;
-use MoySklad\Entities\Products\Product;
-use MoySklad\Entities\Products\Service;
-use MoySklad\Lists\EntityList;
+use TotalCRM\MoySklad\Components\Expand;
+use TotalCRM\MoySklad\Components\FilterQuery;
+use TotalCRM\MoySklad\Components\Http\RequestLog;
+use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Entities\Assortment;
+use TotalCRM\MoySklad\Entities\Documents\Movements\Demand;
+use TotalCRM\MoySklad\Entities\Employee;
+use TotalCRM\MoySklad\Entities\Folders\ProductFolder;
+use TotalCRM\MoySklad\Entities\Group;
+use TotalCRM\MoySklad\Entities\Products\Product;
+use TotalCRM\MoySklad\Entities\Products\Service;
+use TotalCRM\MoySklad\Lists\EntityList;
 
 require_once "TestCase.php";
 

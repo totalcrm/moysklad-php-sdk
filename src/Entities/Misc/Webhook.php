@@ -1,10 +1,11 @@
 <?php
 
-namespace MoySklad\Entities\Misc;
+namespace TotalCRM\MoySklad\Entities\Misc;
 
-use MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
 
-class Webhook extends AbstractEntity {
+class Webhook extends AbstractEntity
+{
 
     const
         ACTION_CREATE = 'CREATE',
@@ -24,7 +25,8 @@ class Webhook extends AbstractEntity {
     /**
      * @return AbstractEntity
      */
-    public function disable(){
+    public function disable()
+    {
         $this->fields->enabled = false;
         return $this->update();
     }
@@ -32,7 +34,8 @@ class Webhook extends AbstractEntity {
     /**
      * @return AbstractEntity
      */
-    public function enable(){
+    public function enable()
+    {
         $this->fields->enabled = true;
         return $this->update();
     }

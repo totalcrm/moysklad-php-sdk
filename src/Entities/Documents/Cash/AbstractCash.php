@@ -1,9 +1,10 @@
 <?php
 
-namespace MoySklad\Entities\Documents\Cash;
+namespace TotalCRM\MoySklad\Entities\Documents\Cash;
 
-use MoySklad\Entities\Documents\AbstractDocument;
+use TotalCRM\MoySklad\Entities\Documents\AbstractDocument;
 
-class AbstractCash extends AbstractDocument{
+class AbstractCash extends AbstractDocument
+{
     public static $entityName = 'a_cash';
 }

@@ -1,12 +1,13 @@
 <?php
 
-namespace MoySklad\Entities\Audit;
+namespace TotalCRM\MoySklad\Entities\Audit;
 
-use MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
-use MoySklad\MoySklad;
-use MoySklad\Registers\ApiUrlRegistry;
+use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
+use TotalCRM\MoySklad\MoySklad;
+use TotalCRM\MoySklad\Registers\ApiUrlRegistry;
 
-class Audit extends AbstractAudit {
+class Audit extends AbstractAudit
+{
     public static $entityName = "audit";
     /**
      * @var string $customQueryUrl
@@ -18,7 +19,8 @@ class Audit extends AbstractAudit {
      * @return string
      * @throws \Throwable
      */
-    public static function getFilters(MoySklad &$skladInstance){
+    public static function getFilters(MoySklad &$skladInstance)
+    {
         return (object)$skladInstance->getClient()->get(
             ApiUrlRegistry::instance()->getAuditFiltersUrl()
         );

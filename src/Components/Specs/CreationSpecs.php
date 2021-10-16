@@ -1,14 +1,16 @@
 <?php
 
-namespace MoySklad\Components\Specs;
+namespace TotalCRM\MoySklad\Components\Specs;
 
 
 /**
  * Class CreationSpecs
  * @package MoySklad\Components\Specs
  */
-class CreationSpecs extends AbstractSpecs {
+class CreationSpecs extends AbstractSpecs
+{
     protected static $cachedDefaultSpecs = null;
+
     /**
      * Get possible variables for spec
      * @return array

@@ -1,11 +1,12 @@
 <?php
 
-namespace MoySklad;
+namespace TotalCRM\MoySklad;
 
-use MoySklad\Components\Http\MoySkladHttpClient;
-use MoySklad\Registers\EntityRegistry;
+use TotalCRM\MoySklad\Components\Http\MoySkladHttpClient;
+use TotalCRM\MoySklad\Registers\EntityRegistry;
 
-class MoySklad{
+class MoySklad
+{
 
     /**
      * @var MoySkladHttpClient
@@ -34,8 +35,9 @@ class MoySklad{
      * @param $password
      * @return string
      */
-    private static function makeHash($login, $password){
-        return crc32($login.$password);
+    private static function makeHash($login, $password)
+    {
+        return crc32($login . $password);
     }
 
     /**
@@ -46,9 +48,10 @@ class MoySklad{
      * @param $posToken
      * @return MoySklad
      */
-    public static function getInstance($login, $password, $subdomain = "online", $posToken = null){
+    public static function getInstance($login, $password, $subdomain = "online", $posToken = null)
+    {
         $hash = static::makeHash($login, $password);
-        if ( empty(static::$instances[$hash]) ){
+        if (empty(static::$instances[$hash])) {
             static::$instances[$hash] = new static($login, $password, $posToken, $hash, $subdomain);
             EntityRegistry::instance()->bootEntities();
         }
@@ -60,7 +63,8 @@ class MoySklad{
      * @param $hashCode
      * @return MoySklad
      */
-    public static function findInstanceByHash($hashCode){
+    public static function findInstanceByHash($hashCode)
+    {
         return static::$instances[$hashCode];
     }
 
@@ -68,21 +72,24 @@ class MoySklad{
      * We're java now
      * @return string
      */
-    public function hashCode(){
+    public function hashCode()
+    {
         return $this->hashCode;
     }
 
     /**
      * @return MoySkladHttpClient
      */
-    public function getClient(){
+    public function getClient()
+    {
         return $this->client;
     }
 
     /**
      * @deprecated
      */
-    public function setPosToken($posToken){
+    public function setPosToken($posToken)
+    {
         $this->client->setPosToken($posToken);
     }
 }

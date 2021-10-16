@@ -1,12 +1,14 @@
 <?php
 
-namespace MoySklad\Utils;
+namespace TotalCRM\MoySklad\Utils;
 
-class CommonDate{
+class CommonDate
+{
     private $input;
 
-    public function __construct($time = null){
-        if ( !$time ) $time = time();
+    public function __construct($time = null)
+    {
+        if (!$time) $time = time();
         $this->input = $time;
     }
 
@@ -14,7 +16,8 @@ class CommonDate{
      * Format a date for moysklad
      * @return bool|string
      */
-    public function format(){
+    public function format()
+    {
         return date("Y-m-d H:i:s", strtotime($this->input));
     }
 }

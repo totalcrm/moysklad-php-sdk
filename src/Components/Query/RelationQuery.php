@@ -1,9 +1,10 @@
 <?php
 
-namespace MoySklad\Components\Query;
+namespace TotalCRM\MoySklad\Components\Query;
 
-use MoySklad\Lists\RelationEntityList;
+use TotalCRM\MoySklad\Lists\RelationEntityList;
 
-class RelationQuery extends AbstractQuery {
+class RelationQuery extends AbstractQuery
+{
     protected static $entityListClass = RelationEntityList::class;
 }

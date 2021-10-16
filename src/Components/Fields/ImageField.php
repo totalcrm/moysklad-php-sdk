@@ -1,20 +1,22 @@
 <?php
 
-namespace MoySklad\Components\Fields;
+namespace TotalCRM\MoySklad\Components\Fields;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use MoySklad\Exceptions\InvalidUrlException;
+use TotalCRM\MoySklad\Exceptions\InvalidUrlException;
 
-class ImageField extends AbstractFieldAccessor{
+class ImageField extends AbstractFieldAccessor
+{
     /**
      * @param $url
      * @param null $fileName
      * @return ImageField
      * @throws InvalidUrlException
      */
-    public static function createFromUrl($url, $fileName = null){
-        if ( filter_var($url, FILTER_VALIDATE_URL) === false ){
+    public static function createFromUrl($url, $fileName = null)
+    {
+        if (filter_var($url, FILTER_VALIDATE_URL) === false) {
             throw new InvalidUrlException($url);
         }
         $image = file_get_contents($url);
@@ -27,7 +29,8 @@ class ImageField extends AbstractFieldAccessor{
      * @return ImageField
      * @throws \Exception
      */
-    public static function createFromPath($path, $fileName = null){
+    public static function createFromPath($path, $fileName = null)
+    {
         /*
          * Php will throw if no file exist
          */
@@ -41,8 +44,9 @@ class ImageField extends AbstractFieldAccessor{
      * @param $fileName
      * @return static
      */
-    private static function createFromExternal($imageBinary, $sourcePath, $fileName){
-        if ( !$fileName ){
+    private static function createFromExternal($imageBinary, $sourcePath, $fileName)
+    {
+        if (!$fileName) {
             $splitSrc = explode('/', $sourcePath);
             $fileName = $splitSrc[count($splitSrc) - 1];
         }
@@ -56,10 +60,11 @@ class ImageField extends AbstractFieldAccessor{
      * @param string $size
      * @return null|string
      */
-    public function getDownloadLink($size = 'normal'){
-        if ( isset($this->meta->href) && $size === 'normal' ) return $this->meta->href;
-        if ( isset($this->miniature->href) && $size === 'miniature' ) return $this->miniature->href;
-        if ( isset($this->tiny->href) && $size === 'tiny' ) return $this->tiny->href;
+    public function getDownloadLink($size = 'normal')
+    {
+        if (isset($this->meta->href) && $size === 'normal') return $this->meta->href;
+        if (isset($this->miniature->href) && $size === 'miniature') return $this->miniature->href;
+        if (isset($this->tiny->href) && $size === 'tiny') return $this->tiny->href;
         return null;
     }
 
@@ -69,9 +74,10 @@ class ImageField extends AbstractFieldAccessor{
      * @return string
      * @throws \Exception
      */
-    public function download($saveFile, $size = 'normal'){
+    public function download($saveFile, $size = 'normal')
+    {
         if ($link = $this->getDownloadLink($size)) {
-            $filePath = fopen($saveFile,'w+');
+            $filePath = fopen($saveFile, 'w+');
             $client = new Client();
 
             $response = $this->e->getSkladInstance()->getClient()->getRaw(

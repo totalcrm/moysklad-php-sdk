@@ -1,15 +1,16 @@
 <?php
 
-namespace MoySklad\Entities\Reports;
+namespace TotalCRM\MoySklad\Entities\Reports;
 
-use MoySklad\Components\Specs\EmptySpecs;
-use MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
-use MoySklad\Entities\AbstractEntity;
-use MoySklad\Interfaces\DoesNotSupportMutationInterface;
-use MoySklad\MoySklad;
-use MoySklad\Registers\ApiUrlRegistry;
+use TotalCRM\MoySklad\Components\Specs\EmptySpecs;
+use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Interfaces\DoesNotSupportMutationInterface;
+use TotalCRM\MoySklad\MoySklad;
+use TotalCRM\MoySklad\Registers\ApiUrlRegistry;
 
-abstract class AbstractReport extends AbstractEntity implements DoesNotSupportMutationInterface {
+abstract class AbstractReport extends AbstractEntity implements DoesNotSupportMutationInterface
+{
     public static $entityName = 'report';
     public static $reportName = 'a_report';
 
@@ -19,9 +20,10 @@ abstract class AbstractReport extends AbstractEntity implements DoesNotSupportMu
      * @param QuerySpecs|null $specs
      * @return \stdClass
      */
-    protected static function queryWithParam(MoySklad $sklad, $param = null, QuerySpecs $specs = null){
-        if ( !$specs ) $specs = EmptySpecs::create();
-        if ( $param === null ){
+    protected static function queryWithParam(MoySklad $sklad, $param = null, QuerySpecs $specs = null)
+    {
+        if (!$specs) $specs = EmptySpecs::create();
+        if ($param === null) {
             $url = ApiUrlRegistry::instance()->getReportUrl(static::$reportName);
         } else {
             $url = ApiUrlRegistry::instance()->getReportWithParamUrl(static::$reportName, $param);

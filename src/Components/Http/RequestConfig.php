@@ -1,8 +1,9 @@
 <?php
 
-namespace MoySklad\Components\Http;
+namespace TotalCRM\MoySklad\Components\Http;
 
-class RequestConfig{
+class RequestConfig
+{
     /**
      * @var array
      */
@@ -13,7 +14,8 @@ class RequestConfig{
         "followRedirects" => true
     ];
 
-    public function __construct($fields = []){
+    public function __construct($fields = [])
+    {
         $this->fields = array_merge($this->fields, $fields);
     }
 
@@ -22,7 +24,8 @@ class RequestConfig{
      * @return mixed
      * @throws \Exception
      */
-    public function get($key){
+    public function get($key)
+    {
         $this->checkKey($key);
         return $this->fields[$key];
     }
@@ -32,7 +35,8 @@ class RequestConfig{
      * @param $value
      * @throws \Exception
      */
-    public function set($key, $value){
+    public function set($key, $value)
+    {
         $this->checkKey($key);
         $this->fields[$key] = $value;
     }
@@ -41,7 +45,8 @@ class RequestConfig{
      * @param $key
      * @throws \Exception
      */
-    private function checkKey($key){
-        if ( !isset($this->fields[$key]) ) throw new \Exception("Unknown option '$key'");
+    private function checkKey($key)
+    {
+        if (!isset($this->fields[$key])) throw new \Exception("Unknown option '$key'");
     }
 }

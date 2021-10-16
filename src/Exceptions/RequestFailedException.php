@@ -1,6 +1,6 @@
 <?php
 
-namespace MoySklad\Exceptions;
+namespace TotalCRM\MoySklad\Exceptions;
 
 use \Exception;
 
@@ -9,7 +9,8 @@ use \Exception;
  * Class RequestFailedException
  * @package MoySklad\Exceptions
  */
-class RequestFailedException extends Exception{
+class RequestFailedException extends Exception
+{
     protected
         $request,
         $response;
@@ -24,18 +25,21 @@ class RequestFailedException extends Exception{
         $this->response = $response;
     }
 
-    public function getRequest(){
+    public function getRequest()
+    {
         return $this->request;
     }
 
-    public function getResponse(){
+    public function getResponse()
+    {
         return $this->response;
     }
 
-    public function getDump(){
+    public function getDump()
+    {
         return [
-          "request" => $this->request,
-          "response" => $this->response
+            "request" => $this->request,
+            "response" => $this->response
         ];
     }
 }

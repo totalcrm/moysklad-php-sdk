@@ -1,6 +1,6 @@
 <?php
 
-namespace MoySklad\Exceptions;
+namespace TotalCRM\MoySklad\Exceptions;
 
 use \Exception;
 
@@ -9,7 +9,8 @@ use \Exception;
  * Class UnknownEntityException
  * @package MoySklad\Exceptions
  */
-class UnknownEntityException extends Exception{
+class UnknownEntityException extends Exception
+{
     public function __construct($message, $code = 0, Exception $previous = null)
     {
         parent::__construct(

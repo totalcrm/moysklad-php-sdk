@@ -1,11 +1,14 @@
 <?php
 
-namespace MoySklad\Components\Specs\QuerySpecs;
+namespace TotalCRM\MoySklad\Components\Specs\QuerySpecs;
 
 
-class DocumentQuerySpecs extends QuerySpecs {
+class DocumentQuerySpecs extends QuerySpecs
+{
     protected static $cachedDefaultSpecs = null;
-    public function getDefaults(){
+
+    public function getDefaults()
+    {
         $res = parent::getDefaults();
         $res['state.name'] = null;
         $res['state.id'] = null;

@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities\Audit;
+namespace TotalCRM\MoySklad\Entities\Audit;
 
-class AuditEvent extends AbstractAudit {
+class AuditEvent extends AbstractAudit
+{
     public static $entityName = "auditevent";
 }

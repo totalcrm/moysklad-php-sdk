@@ -1,12 +1,14 @@
 <?php
 
-namespace MoySklad\Entities\Documents\PriceLists;
+namespace TotalCRM\MoySklad\Entities\Documents\PriceLists;
 
-use MoySklad\Entities\Documents\AbstractDocument;
-use MoySklad\Entities\Organization;
+use TotalCRM\MoySklad\Entities\Documents\AbstractDocument;
+use TotalCRM\MoySklad\Entities\Organization;
 
-class PriceList extends AbstractDocument {
+class PriceList extends AbstractDocument
+{
     public static $entityName = 'pricelist';
+
     public static function getFieldsRequiredForCreation()
     {
         return [Organization::$entityName, 'columns'];

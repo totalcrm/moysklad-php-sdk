@@ -2,8 +2,8 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Components\Fields\ImageField;
-use MoySklad\Entities\Products\Product;
+use TotalCRM\MoySklad\Components\Fields\ImageField;
+use TotalCRM\MoySklad\Entities\Products\Product;
 
 require_once "TestCase.php";
 

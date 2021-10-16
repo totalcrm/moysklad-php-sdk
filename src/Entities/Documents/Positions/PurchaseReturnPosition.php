@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities\Documents\Positions;
+namespace TotalCRM\MoySklad\Entities\Documents\Positions;
 
-class PurchaseReturnPosition extends AbstractPosition  {
+class PurchaseReturnPosition extends AbstractPosition
+{
     public static $entityName = 'purchasereturnposition';
 }

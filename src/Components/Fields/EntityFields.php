@@ -1,12 +1,13 @@
 <?php
 
-namespace MoySklad\Components\Fields;
+namespace TotalCRM\MoySklad\Components\Fields;
 
 /**
  * Class EntityFields
  * @package MoySklad\Components\Fields
  */
-class EntityFields extends AbstractFieldAccessor {
+class EntityFields extends AbstractFieldAccessor
+{
 
     /**
      * Replace fields. Creates MetaField and AttributeCollection within itself
@@ -14,9 +15,9 @@ class EntityFields extends AbstractFieldAccessor {
      */
     public function replace($fields)
     {
-        if ( $fields instanceof EntityFields ) $fields = $fields->getInternal();
-        foreach ( $fields as $fieldName => $field ){
-            switch ( $fieldName ){
+        if ($fields instanceof EntityFields) $fields = $fields->getInternal();
+        foreach ($fields as $fieldName => $field) {
+            switch ($fieldName) {
                 case "meta":
                     $this->storage->meta = new MetaField($field, $this->e);
                     break;
@@ -36,7 +37,8 @@ class EntityFields extends AbstractFieldAccessor {
     /**
      * @return MetaField|null
      */
-    public function getMeta(){
-        return $this->storage->meta?$this->storage->meta:null;
+    public function getMeta()
+    {
+        return $this->storage->meta ? $this->storage->meta : null;
     }
 }

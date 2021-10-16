@@ -1,11 +1,12 @@
 <?php
 
-namespace MoySklad\Entities\Misc;
+namespace TotalCRM\MoySklad\Entities\Misc;
 
-use MoySklad\Entities\AbstractEntity;
-use MoySklad\Traits\RequiresOnlyNameForCreation;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Traits\RequiresOnlyNameForCreation;
 
-class CustomEntity extends AbstractEntity  {
+class CustomEntity extends AbstractEntity
+{
     use RequiresOnlyNameForCreation;
     public static $entityName = 'customentity';
 }

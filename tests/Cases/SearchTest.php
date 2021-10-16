@@ -2,11 +2,11 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Components\Http\RequestLog;
-use MoySklad\Entities\Products\Product;
-use MoySklad\Exceptions\ApiResponseException;
-use MoySklad\Exceptions\RequestFailedException;
-use MoySklad\Lists\EntityList;
+use TotalCRM\MoySklad\Components\Http\RequestLog;
+use TotalCRM\MoySklad\Entities\Products\Product;
+use TotalCRM\MoySklad\Exceptions\ApiResponseException;
+use TotalCRM\MoySklad\Exceptions\RequestFailedException;
+use TotalCRM\MoySklad\Lists\EntityList;
 
 require_once "TestCase.php";
 

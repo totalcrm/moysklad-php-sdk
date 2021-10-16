@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities\Documents\Invoices;
+namespace TotalCRM\MoySklad\Entities\Documents\Invoices;
 
-class InvoiceOut extends AbstractInvoice{
+class InvoiceOut extends AbstractInvoice
+{
     public static $entityName = 'invoiceout';
 }

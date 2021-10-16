@@ -1,9 +1,10 @@
 <?php
 
-namespace MoySklad\Components\Specs;
+namespace TotalCRM\MoySklad\Components\Specs;
 
 
-class EmptySpecs extends AbstractSpecs {
+class EmptySpecs extends AbstractSpecs
+{
     protected static $cachedDefaultSpecs = null;
 
     /**

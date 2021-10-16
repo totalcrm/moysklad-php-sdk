@@ -1,13 +1,14 @@
 <?php
 
-namespace MoySklad\Components;
+namespace TotalCRM\MoySklad\Components;
 
 /**
  * Filter query is used with ListQuery::filter()
  * Class FilterQuery
  * @package MoySklad\Components
  */
-class FilterQuery{
+class FilterQuery
+{
     private
         $queryBuffer = [];
 
@@ -17,7 +18,8 @@ class FilterQuery{
      * @param $value
      * @return $this
      */
-    public function eq($field, $value){
+    public function eq($field, $value)
+    {
         $this->queryBuffer[] = "$field=$value";
         return $this;
     }
@@ -28,7 +30,8 @@ class FilterQuery{
      * @param $value
      * @return $this
      */
-    public function neq($field, $value){
+    public function neq($field, $value)
+    {
         $this->queryBuffer[] = "$field!=$value";
         return $this;
     }
@@ -39,7 +42,8 @@ class FilterQuery{
      * @param $value
      * @return $this
      */
-    public function gt($field, $value){
+    public function gt($field, $value)
+    {
         $this->queryBuffer[] = "$field>$value";
         return $this;
     }
@@ -50,7 +54,8 @@ class FilterQuery{
      * @param $value
      * @return $this
      */
-    public function lt($field, $value){
+    public function lt($field, $value)
+    {
         $this->queryBuffer[] = "$field<$value";
         return $this;
     }
@@ -61,7 +66,8 @@ class FilterQuery{
      * @param $value
      * @return $this
      */
-    public function gte($field, $value){
+    public function gte($field, $value)
+    {
         $this->queryBuffer[] = "$field>=$value";
         return $this;
     }
@@ -72,7 +78,8 @@ class FilterQuery{
      * @param $value
      * @return $this
      */
-    public function lte($field, $value){
+    public function lte($field, $value)
+    {
         $this->queryBuffer[] = "$field<=$value";
         return $this;
     }
@@ -83,7 +90,8 @@ class FilterQuery{
      * @param $value
      * @return $this
      */
-    public function like($field, $value){
+    public function like($field, $value)
+    {
         $this->queryBuffer[] = "$field~$value";
         return $this;
     }
@@ -92,7 +100,8 @@ class FilterQuery{
      * Get internal query buffer
      * @return array
      */
-    public function getBuffer(){
+    public function getBuffer()
+    {
         return $this->queryBuffer;
     }
 
@@ -100,7 +109,8 @@ class FilterQuery{
      * Convert itself to string
      * @return string
      */
-    public function getRaw(){
+    public function getRaw()
+    {
         return implode(";", $this->queryBuffer);
     }
 }

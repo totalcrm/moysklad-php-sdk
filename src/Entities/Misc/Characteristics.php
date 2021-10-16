@@ -1,9 +1,10 @@
 <?php
 
-namespace MoySklad\Entities\Misc;
+namespace TotalCRM\MoySklad\Entities\Misc;
 
-use MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
 
-class Characteristics extends AbstractEntity  {
+class Characteristics extends AbstractEntity
+{
     public static $entityName = 'characteristics';
 }

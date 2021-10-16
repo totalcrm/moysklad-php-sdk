@@ -1,10 +1,12 @@
 <?php
 
-namespace MoySklad\Components\Specs;
+namespace TotalCRM\MoySklad\Components\Specs;
 
 
-class LinkingSpecs extends AbstractSpecs {
+class LinkingSpecs extends AbstractSpecs
+{
     protected static $cachedDefaultSpecs = null;
+
     /**
      * Get possible variables for spec
      *  name: what name to use when linking

@@ -2,11 +2,11 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Components\Expand;
-use MoySklad\Components\Specs\LinkingSpecs;
-use MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
-use MoySklad\Entities\Employee;
-use MoySklad\Utils\CommonDate;
+use TotalCRM\MoySklad\Components\Expand;
+use TotalCRM\MoySklad\Components\Specs\LinkingSpecs;
+use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
+use TotalCRM\MoySklad\Entities\Employee;
+use TotalCRM\MoySklad\Utils\CommonDate;
 
 require_once "TestCase.php";
 

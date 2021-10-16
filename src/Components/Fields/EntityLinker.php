@@ -1,16 +1,17 @@
 <?php
 
-namespace MoySklad\Components\Fields;
+namespace TotalCRM\MoySklad\Components\Fields;
 
-use MoySklad\Components\Specs\ConstructionSpecs;
-use MoySklad\Components\Specs\LinkingSpecs;
-use MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Components\Specs\ConstructionSpecs;
+use TotalCRM\MoySklad\Components\Specs\LinkingSpecs;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
 
 /**
  * Class EntityLinker
  * @package MoySklad\Components\Fields
  */
-class EntityLinker extends AbstractFieldAccessor{
+class EntityLinker extends AbstractFieldAccessor
+{
 
     /**
      * Link an entity to another. Link is a temporary storage before creating or updating entity.
@@ -19,27 +20,28 @@ class EntityLinker extends AbstractFieldAccessor{
      * @param LinkingSpecs|null $specs
      * @throws \Exception
      */
-    public function link(AbstractEntity $entity, LinkingSpecs $specs = null ){
-        if ( !$specs ) $specs = LinkingSpecs::create();
+    public function link(AbstractEntity $entity, LinkingSpecs $specs = null)
+    {
+        if (!$specs) $specs = LinkingSpecs::create();
         $name = $specs->name;
         $multiple = $specs->multiple;
         $selectedFields = $specs->fields;
         $excludedFields = $specs->excludedFields;
 
-        if ( $selectedFields && $excludedFields ){
+        if ($selectedFields && $excludedFields) {
             throw new \Exception('Can\'t use "fields" param with "excludedFields"');
         }
 
         $cls = get_class($entity);
-        if ( $selectedFields || $excludedFields ){
+        if ($selectedFields || $excludedFields) {
             $tFields = [];
-            foreach ($entity->fields->getInternal() as $k=> $v){
-                if ( $selectedFields ){
-                    if ( in_array($k, $selectedFields) ){
+            foreach ($entity->fields->getInternal() as $k => $v) {
+                if ($selectedFields) {
+                    if (in_array($k, $selectedFields)) {
                         $tFields[$k] = $v;
                     }
                 } else {
-                    if ( !in_array($k, $excludedFields) ){
+                    if (!in_array($k, $excludedFields)) {
                         $tFields[$k] = $v;
                     }
                 }
@@ -51,11 +53,11 @@ class EntityLinker extends AbstractFieldAccessor{
         } else {
             $newEntity = clone $entity;
         }
-        if ( $name === null ){
+        if ($name === null) {
             $name = $cls::$entityName;
         }
-        if ( $multiple ){
-            if ( empty($this->storage->{$name}) ) $this->storage->{$name} = [];
+        if ($multiple) {
+            if (empty($this->storage->{$name})) $this->storage->{$name} = [];
             $this->storage->{$name}[] = $newEntity;
         } else {
             $this->storage->{$name} = $newEntity;
@@ -65,7 +67,8 @@ class EntityLinker extends AbstractFieldAccessor{
     /**
      * @return \stdClass
      */
-    public function getLinks(){
+    public function getLinks()
+    {
         return $this->storage;
     }
 
@@ -73,7 +76,8 @@ class EntityLinker extends AbstractFieldAccessor{
      * @param EntityLinker $otherLinker
      * @return $this
      */
-    public function reattachLinks(EntityLinker $otherLinker){
+    public function reattachLinks(EntityLinker $otherLinker)
+    {
         $this->storage = $otherLinker->getLinks();
         return $this;
     }

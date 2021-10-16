@@ -1,9 +1,10 @@
 <?php
 
-namespace MoySklad\Entities\Documents\Processings;
+namespace TotalCRM\MoySklad\Entities\Documents\Processings;
 
-use MoySklad\Entities\Documents\AbstractDocument;
+use TotalCRM\MoySklad\Entities\Documents\AbstractDocument;
 
-class AbstractProcessing extends AbstractDocument{
+class AbstractProcessing extends AbstractDocument
+{
     public static $entityName = 'a_processing';
 }

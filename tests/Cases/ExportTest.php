@@ -2,9 +2,9 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Entities\Documents\Inventory;
-use MoySklad\Entities\Organization;
-use MoySklad\Entities\Store;
+use TotalCRM\MoySklad\Entities\Documents\Inventory;
+use TotalCRM\MoySklad\Entities\Organization;
+use TotalCRM\MoySklad\Entities\Store;
 
 require_once "TestCase.php";
 

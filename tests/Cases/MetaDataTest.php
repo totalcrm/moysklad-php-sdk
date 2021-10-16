@@ -2,10 +2,10 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Entities\Documents\Orders\CustomerOrder;
-use MoySklad\Entities\Misc\Attribute;
-use MoySklad\Entities\Misc\State;
-use MoySklad\Lists\EntityList;
+use TotalCRM\MoySklad\Entities\Documents\Orders\CustomerOrder;
+use TotalCRM\MoySklad\Entities\Misc\Attribute;
+use TotalCRM\MoySklad\Entities\Misc\State;
+use TotalCRM\MoySklad\Lists\EntityList;
 
 require_once "TestCase.php";
 

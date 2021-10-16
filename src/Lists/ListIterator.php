@@ -1,13 +1,14 @@
 <?php
 
-namespace MoySklad\Lists;
+namespace TotalCRM\MoySklad\Lists;
 
 /**
  * Iterator for EntityList
  * Class ListIterator
  * @package MoySklad\Lists
  */
-final class ListIterator implements \Iterator{
+final class ListIterator implements \Iterator
+{
     private
         $items = [],
         $cursor = 0;

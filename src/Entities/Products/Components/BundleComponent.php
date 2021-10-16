@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities\Products\Components;
+namespace TotalCRM\MoySklad\Entities\Products\Components;
 
-class BundleComponent extends AbstractComponent  {
+class BundleComponent extends AbstractComponent
+{
     public static $entityName = 'bundlecomponent';
 }

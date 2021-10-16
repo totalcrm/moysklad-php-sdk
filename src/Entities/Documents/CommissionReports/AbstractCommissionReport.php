@@ -1,15 +1,17 @@
 <?php
 
-namespace MoySklad\Entities\Documents\CommissionReports;
+namespace TotalCRM\MoySklad\Entities\Documents\CommissionReports;
 
-use MoySklad\Entities\Contract;
-use MoySklad\Entities\Documents\AbstractDocument;
-use MoySklad\Entities\Organization;
+use TotalCRM\MoySklad\Entities\Contract;
+use TotalCRM\MoySklad\Entities\Documents\AbstractDocument;
+use TotalCRM\MoySklad\Entities\Organization;
 
-class AbstractCommissionReport extends AbstractDocument{
+class AbstractCommissionReport extends AbstractDocument
+{
     public static $entityName = 'a_commissionreport';
+
     public static function getFieldsRequiredForCreation()
     {
-        return [Organization::$entityName,  'agent', Contract::$entityName, 'commissionPeriodStart', 'commissionPeriodEnd'];
+        return [Organization::$entityName, 'agent', Contract::$entityName, 'commissionPeriodStart', 'commissionPeriodEnd'];
     }
 }

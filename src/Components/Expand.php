@@ -1,17 +1,18 @@
 <?php
 
-namespace MoySklad\Components;
+namespace TotalCRM\MoySklad\Components;
 
 /**
  * Used for returning results with expanded relations
  * Class Expand
  * @package MoySklad\Components
  */
-class Expand{
+class Expand
+{
     private
         $params = [];
 
-    private function __construct( $params )
+    private function __construct($params)
     {
         $this->params = $params;
     }
@@ -22,8 +23,9 @@ class Expand{
      * @return static
      * @throws \Exception
      */
-    public static function create($params){
-        if ( !is_array($params) ) throw new \Exception('Expand params must be an array');
+    public static function create($params)
+    {
+        if (!is_array($params)) throw new \Exception('Expand params must be an array');
         return new static($params);
     }
 
@@ -31,7 +33,8 @@ class Expand{
      * Convert itself to string
      * @return string
      */
-    public function flatten(){
+    public function flatten()
+    {
         return implode(',', $this->params);
     }
 }

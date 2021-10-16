@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities\Documents\Templates;
+namespace TotalCRM\MoySklad\Entities\Documents\Templates;
 
-class CustomTemplate extends AbstractTemplate  {
+class CustomTemplate extends AbstractTemplate
+{
     public static $entityName = 'customtemplate';
 }

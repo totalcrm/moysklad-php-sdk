@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities;
+namespace TotalCRM\MoySklad\Entities;
 
-class ContactPerson extends AbstractEntity{
+class ContactPerson extends AbstractEntity
+{
     public static $entityName = 'contactperson';
 }

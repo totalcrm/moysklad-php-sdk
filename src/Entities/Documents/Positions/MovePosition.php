@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities\Documents\Positions;
+namespace TotalCRM\MoySklad\Entities\Documents\Positions;
 
-class MovePosition extends AbstractPosition  {
+class MovePosition extends AbstractPosition
+{
     public static $entityName = 'moveposition';
 }

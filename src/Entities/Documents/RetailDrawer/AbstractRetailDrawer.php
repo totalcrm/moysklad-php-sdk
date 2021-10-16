@@ -1,9 +1,10 @@
 <?php
 
-namespace MoySklad\Entities\Documents\RetailDrawer;
+namespace TotalCRM\MoySklad\Entities\Documents\RetailDrawer;
 
-use MoySklad\Entities\Documents\AbstractDocument;
+use TotalCRM\MoySklad\Entities\Documents\AbstractDocument;
 
-class AbstractRetailDrawer extends AbstractDocument{
+class AbstractRetailDrawer extends AbstractDocument
+{
     public static $entityName = 'a_retaildrawer';
 }

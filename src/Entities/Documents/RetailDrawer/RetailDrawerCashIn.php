@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities\Documents\RetailDrawer;
+namespace TotalCRM\MoySklad\Entities\Documents\RetailDrawer;
 
-class RetailDrawerCashIn extends AbstractRetailDrawer{
+class RetailDrawerCashIn extends AbstractRetailDrawer
+{
     public static $entityName = 'retaildrawercashin';
 }

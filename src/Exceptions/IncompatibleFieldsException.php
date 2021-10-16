@@ -1,6 +1,6 @@
 <?php
 
-namespace MoySklad\Exceptions;
+namespace TotalCRM\MoySklad\Exceptions;
 
 use \Exception;
 
@@ -9,11 +9,12 @@ use \Exception;
  * Class IncompatibleFieldsException
  * @package MoySklad\Exceptions
  */
-class IncompatibleFieldsException extends Exception{
+class IncompatibleFieldsException extends Exception
+{
     public function __construct($firstField, $secondField, $code = 0, Exception $previous = null)
     {
         parent::__construct(
-            'Field "' . $firstField . '" can\'t be used with "' . $secondField . '" field' ,
+            'Field "' . $firstField . '" can\'t be used with "' . $secondField . '" field',
             $code,
             $previous);
     }

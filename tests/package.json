@@ -1,23 +1,23 @@
 {
   "name": "tests",
   "version": "1.0.0",
-  "description": "tests for tooyz/moysklad",
+  "description": "tests for totalcrm/moysklad-php-sdk",
   "scripts": {
     "test": "phpunit --configuration=\"./phpunit.xml\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tooyz/moysklad.git"
+    "url": "git+https://github.com/totalcrm/moysklad-php-sdk.git"
   },
   "keywords": [
     "php",
     "moysklad",
     "api"
   ],
-  "author": "tooyz",
+  "author": "totalcrm",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tooyz/moysklad/issues"
+    "url": "https://github.com/totalcrm/moysklad-php-sdk/issues"
   },
-  "homepage": "https://github.com/tooyz/moysklad#readme"
+  "homepage": "https://github.com/totalcrm/moysklad-php-sdk#readme"
 }

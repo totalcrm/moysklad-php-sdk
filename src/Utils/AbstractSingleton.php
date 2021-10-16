@@ -1,16 +1,20 @@
 <?php
 
-namespace MoySklad\Utils;
+namespace TotalCRM\MoySklad\Utils;
 
-abstract class AbstractSingleton{
+abstract class AbstractSingleton
+{
     protected static $instance = null;
 
-    protected function __construct(){}
+    protected function __construct()
+    {
+    }
 
     /**
      * @return static|null
      */
-    final public static function instance() {
+    final public static function instance()
+    {
         if (is_null(static::$instance)) {
             $class = get_called_class();
             static::$instance = new $class();

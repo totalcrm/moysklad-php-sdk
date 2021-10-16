@@ -1,27 +1,28 @@
 <?php
 
-namespace MoySklad\Components\Fields;
+namespace TotalCRM\MoySklad\Components\Fields;
 
-use MoySklad\Entities\Misc\Attribute;
-use MoySklad\Registers\EntityRegistry;
+use TotalCRM\MoySklad\Entities\Misc\Attribute;
+use TotalCRM\MoySklad\Registers\EntityRegistry;
 
 /**
  * "attributes" field of entity
  * Class AttributeCollection
  * @package MoySklad\Components\Fields
  */
-class AttributeCollection extends AbstractFieldAccessor{
+class AttributeCollection extends AbstractFieldAccessor
+{
 
     private static $ep = null;
 
     public function __construct($fields)
     {
-        if ( $fields instanceof static ) {
+        if ($fields instanceof static) {
             parent::__construct($fields->getInternal());
         } else {
             parent::__construct(['attrs' => $fields]);
         }
-        if ( self::$ep === null ){
+        if (self::$ep === null) {
             self::$ep = EntityRegistry::instance();
         }
     }
@@ -30,14 +31,16 @@ class AttributeCollection extends AbstractFieldAccessor{
      * Append an attribute
      * @param Attribute $attribute
      */
-    public function add(Attribute $attribute){
+    public function add(Attribute $attribute)
+    {
         $this->storage->attrs[] = $attribute;
     }
 
     /**
      * @return mixed
      */
-    public function getList(){
+    public function getList()
+    {
         return $this->storage->attrs;
     }
 

@@ -2,7 +2,7 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Entities\Reports\DashboardReport;
+use TotalCRM\MoySklad\Entities\Reports\DashboardReport;
 
 require_once "TestCase.php";
 

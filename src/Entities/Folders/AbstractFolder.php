@@ -1,9 +1,9 @@
 <?php
 
-namespace MoySklad\Entities\Folders;
+namespace TotalCRM\MoySklad\Entities\Folders;
 
-use MoySklad\Entities\AbstractEntity;
-use MoySklad\Traits\RequiresOnlyNameForCreation;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Traits\RequiresOnlyNameForCreation;
 
 class AbstractFolder extends AbstractEntity
 {

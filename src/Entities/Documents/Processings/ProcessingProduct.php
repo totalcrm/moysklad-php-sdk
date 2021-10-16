@@ -1,6 +1,6 @@
 <?php
 
-namespace MoySklad\Entities\Documents\Processings;
+namespace TotalCRM\MoySklad\Entities\Documents\Processings;
 
 
 class ProcessingProduct extends AbstractProcessing

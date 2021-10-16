@@ -1,10 +1,11 @@
 <?php
 
-namespace MoySklad\Entities\Products;
+namespace TotalCRM\MoySklad\Entities\Products;
 
-use MoySklad\Entities\Assortment;
+use TotalCRM\MoySklad\Entities\Assortment;
 
-class Consignment extends AbstractProduct{
+class Consignment extends AbstractProduct
+{
     public static
         $entityName = 'consignment';
 

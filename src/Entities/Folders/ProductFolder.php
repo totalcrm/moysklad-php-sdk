@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities\Folders;
+namespace TotalCRM\MoySklad\Entities\Folders;
 
-class ProductFolder extends AbstractFolder{
+class ProductFolder extends AbstractFolder
+{
     public static $entityName = 'productfolder';
 }

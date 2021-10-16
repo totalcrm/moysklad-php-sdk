@@ -1,79 +1,81 @@
 <?php
 
-namespace MoySklad\Components\MutationBuilders;
+namespace TotalCRM\MoySklad\Components\MutationBuilders;
 
-use MoySklad\Components\Specs\LinkingSpecs;
-use MoySklad\Entities\AbstractEntity;
-use MoySklad\Entities\Account;
-use MoySklad\Entities\Cashier;
-use MoySklad\Entities\ContactPerson;
-use MoySklad\Entities\Contract;
-use MoySklad\Entities\Counterparty;
-use MoySklad\Entities\Country;
-use MoySklad\Entities\Currency;
-use MoySklad\Entities\Discount;
-use MoySklad\Entities\Documents\Cash\CashIn;
-use MoySklad\Entities\Documents\Cash\CashOut;
-use MoySklad\Entities\Documents\Factures\FactureIn;
-use MoySklad\Entities\Documents\Factures\FactureOut;
-use MoySklad\Entities\Documents\Inventory;
-use MoySklad\Entities\Documents\Invoices\InvoiceIn;
-use MoySklad\Entities\Documents\Invoices\InvoiceOut;
-use MoySklad\Entities\Documents\Movements\Demand;
-use MoySklad\Entities\Documents\Movements\Enter;
-use MoySklad\Entities\Documents\Movements\Loss;
-use MoySklad\Entities\Documents\Movements\Move;
-use MoySklad\Entities\Documents\Movements\Supply;
-use MoySklad\Entities\Documents\Orders\CustomerOrder;
-use MoySklad\Entities\Documents\Orders\PurchaseOrder;
-use MoySklad\Entities\Documents\Payments\PaymentIn;
-use MoySklad\Entities\Documents\Payments\PaymentOut;
-use MoySklad\Entities\Documents\Positions\CustomerOrderPosition;
-use MoySklad\Entities\Documents\Positions\InventoryPosition;
-use MoySklad\Entities\Documents\Positions\EnterPosition;
-use MoySklad\Entities\Documents\Positions\LossPosition;
-use MoySklad\Entities\Documents\Positions\MovePosition;
-use MoySklad\Entities\Documents\RetailShift;
-use MoySklad\Entities\Documents\PriceLists\PriceList;
-use MoySklad\Entities\Documents\Processings\Processing;
-use MoySklad\Entities\Documents\Processings\ProcessingOrder;
-use MoySklad\Entities\Documents\Processings\ProcessingPlan;
-use MoySklad\Entities\Documents\Retail\RetailDemand;
-use MoySklad\Entities\Documents\Retail\RetailSalesReturn;
-use MoySklad\Entities\Documents\RetailDrawer\RetailDrawerCashIn;
-use MoySklad\Entities\Documents\RetailDrawer\RetailDrawerCashOut;
-use MoySklad\Entities\Documents\Returns\PurchaseReturn;
-use MoySklad\Entities\Documents\Returns\SalesReturn;
-use MoySklad\Entities\Employee;
-use MoySklad\Entities\ExpenseItem;
-use MoySklad\Entities\Folders\ProductFolder;
-use MoySklad\Entities\Group;
-use MoySklad\Entities\Misc\Attribute;
-use MoySklad\Entities\Misc\Characteristics;
-use MoySklad\Entities\Misc\CompanySettings;
-use MoySklad\Entities\Misc\CustomEntity;
-use MoySklad\Entities\Misc\State;
-use MoySklad\Entities\Organization;
-use MoySklad\Entities\Products\AbstractProduct;
-use MoySklad\Entities\Products\Bundle;
-use MoySklad\Entities\Products\Consignment;
-use MoySklad\Entities\Products\Product;
-use MoySklad\Entities\Products\Service;
-use MoySklad\Entities\Products\Variant;
-use MoySklad\Entities\Project;
-use MoySklad\Entities\RetailStore;
-use MoySklad\Entities\Store;
-use MoySklad\Entities\Uom;
-use MoySklad\Entities\Bonusprogram;
-use MoySklad\Lists\EntityList;
+use TotalCRM\MoySklad\Components\Specs\LinkingSpecs;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Entities\Account;
+use TotalCRM\MoySklad\Entities\Cashier;
+use TotalCRM\MoySklad\Entities\ContactPerson;
+use TotalCRM\MoySklad\Entities\Contract;
+use TotalCRM\MoySklad\Entities\Counterparty;
+use TotalCRM\MoySklad\Entities\Country;
+use TotalCRM\MoySklad\Entities\Currency;
+use TotalCRM\MoySklad\Entities\Discount;
+use TotalCRM\MoySklad\Entities\Documents\Cash\CashIn;
+use TotalCRM\MoySklad\Entities\Documents\Cash\CashOut;
+use TotalCRM\MoySklad\Entities\Documents\Factures\FactureIn;
+use TotalCRM\MoySklad\Entities\Documents\Factures\FactureOut;
+use TotalCRM\MoySklad\Entities\Documents\Inventory;
+use TotalCRM\MoySklad\Entities\Documents\Invoices\InvoiceIn;
+use TotalCRM\MoySklad\Entities\Documents\Invoices\InvoiceOut;
+use TotalCRM\MoySklad\Entities\Documents\Movements\Demand;
+use TotalCRM\MoySklad\Entities\Documents\Movements\Enter;
+use TotalCRM\MoySklad\Entities\Documents\Movements\Loss;
+use TotalCRM\MoySklad\Entities\Documents\Movements\Move;
+use TotalCRM\MoySklad\Entities\Documents\Movements\Supply;
+use TotalCRM\MoySklad\Entities\Documents\Orders\CustomerOrder;
+use TotalCRM\MoySklad\Entities\Documents\Orders\PurchaseOrder;
+use TotalCRM\MoySklad\Entities\Documents\Payments\PaymentIn;
+use TotalCRM\MoySklad\Entities\Documents\Payments\PaymentOut;
+use TotalCRM\MoySklad\Entities\Documents\Positions\CustomerOrderPosition;
+use TotalCRM\MoySklad\Entities\Documents\Positions\InventoryPosition;
+use TotalCRM\MoySklad\Entities\Documents\Positions\EnterPosition;
+use TotalCRM\MoySklad\Entities\Documents\Positions\LossPosition;
+use TotalCRM\MoySklad\Entities\Documents\Positions\MovePosition;
+use TotalCRM\MoySklad\Entities\Documents\RetailShift;
+use TotalCRM\MoySklad\Entities\Documents\PriceLists\PriceList;
+use TotalCRM\MoySklad\Entities\Documents\Processings\Processing;
+use TotalCRM\MoySklad\Entities\Documents\Processings\ProcessingOrder;
+use TotalCRM\MoySklad\Entities\Documents\Processings\ProcessingPlan;
+use TotalCRM\MoySklad\Entities\Documents\Retail\RetailDemand;
+use TotalCRM\MoySklad\Entities\Documents\Retail\RetailSalesReturn;
+use TotalCRM\MoySklad\Entities\Documents\RetailDrawer\RetailDrawerCashIn;
+use TotalCRM\MoySklad\Entities\Documents\RetailDrawer\RetailDrawerCashOut;
+use TotalCRM\MoySklad\Entities\Documents\Returns\PurchaseReturn;
+use TotalCRM\MoySklad\Entities\Documents\Returns\SalesReturn;
+use TotalCRM\MoySklad\Entities\Employee;
+use TotalCRM\MoySklad\Entities\ExpenseItem;
+use TotalCRM\MoySklad\Entities\Folders\ProductFolder;
+use TotalCRM\MoySklad\Entities\Group;
+use TotalCRM\MoySklad\Entities\Misc\Attribute;
+use TotalCRM\MoySklad\Entities\Misc\Characteristics;
+use TotalCRM\MoySklad\Entities\Misc\CompanySettings;
+use TotalCRM\MoySklad\Entities\Misc\CustomEntity;
+use TotalCRM\MoySklad\Entities\Misc\State;
+use TotalCRM\MoySklad\Entities\Organization;
+use TotalCRM\MoySklad\Entities\Products\AbstractProduct;
+use TotalCRM\MoySklad\Entities\Products\Bundle;
+use TotalCRM\MoySklad\Entities\Products\Consignment;
+use TotalCRM\MoySklad\Entities\Products\Product;
+use TotalCRM\MoySklad\Entities\Products\Service;
+use TotalCRM\MoySklad\Entities\Products\Variant;
+use TotalCRM\MoySklad\Entities\Project;
+use TotalCRM\MoySklad\Entities\RetailStore;
+use TotalCRM\MoySklad\Entities\Store;
+use TotalCRM\MoySklad\Entities\Uom;
+use TotalCRM\MoySklad\Entities\Bonusprogram;
+use TotalCRM\MoySklad\Lists\EntityList;
 
-abstract class AbstractMutationBuilder{
+abstract class AbstractMutationBuilder
+{
     /**
      * @var AbstractEntity
      */
     protected $e;
 
-    public function __construct(AbstractEntity &$entity){
+    public function __construct(AbstractEntity &$entity)
+    {
         $this->e = $entity;
     }
 
@@ -83,7 +85,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addAccount(Account $account, LinkingSpecs $specs = null){
+    public function addAccount(Account $account, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($account, $specs);
     }
 
@@ -93,7 +96,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addCashier(Cashier $cashier, LinkingSpecs $specs = null){
+    public function addCashier(Cashier $cashier, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($cashier, $specs);
     }
 
@@ -103,7 +107,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addContactPerson(ContactPerson $contactPerson, LinkingSpecs $specs = null){
+    public function addContactPerson(ContactPerson $contactPerson, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($contactPerson, $specs);
     }
 
@@ -113,7 +118,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addContract(Contract $contract, LinkingSpecs $specs = null){
+    public function addContract(Contract $contract, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($contract, $specs);
     }
 
@@ -123,7 +129,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addCounterparty(Counterparty $counterparty, LinkingSpecs $specs = null){
+    public function addCounterparty(Counterparty $counterparty, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($counterparty, $specs, LinkingSpecs::create([
             "name" => "agent"
         ]));
@@ -135,7 +142,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addCountry(Country $country, LinkingSpecs $specs = null){
+    public function addCountry(Country $country, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($country, $specs);
     }
 
@@ -145,7 +153,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addCurrency(Currency $currency, LinkingSpecs $specs = null){
+    public function addCurrency(Currency $currency, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($currency, $specs);
     }
 
@@ -155,7 +164,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addDiscount(Discount $discount, LinkingSpecs $specs = null){
+    public function addDiscount(Discount $discount, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($discount, $specs);
     }
 
@@ -165,7 +175,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addEmployee(Employee $employee, LinkingSpecs $specs = null){
+    public function addEmployee(Employee $employee, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($employee, $specs);
     }
 
@@ -175,7 +186,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addExpenseItem(ExpenseItem $expenseItem, LinkingSpecs $specs = null){
+    public function addExpenseItem(ExpenseItem $expenseItem, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($expenseItem, $specs);
     }
 
@@ -185,7 +197,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addGroup(Group $group, LinkingSpecs $specs = null){
+    public function addGroup(Group $group, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($group, $specs);
     }
 
@@ -195,7 +208,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addOrganization(Organization $organization, LinkingSpecs $specs = null){
+    public function addOrganization(Organization $organization, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($organization, $specs);
     }
 
@@ -205,7 +219,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addProject(Project $project, LinkingSpecs $specs = null){
+    public function addProject(Project $project, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($project, $specs);
     }
 
@@ -215,7 +230,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addRetailStore(RetailStore $retailStore, LinkingSpecs $specs = null){
+    public function addRetailStore(RetailStore $retailStore, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($retailStore, $specs);
     }
 
@@ -225,7 +241,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addStore(Store $store, LinkingSpecs $specs = null){
+    public function addStore(Store $store, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($store, $specs);
     }
 
@@ -235,7 +252,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addUom(Uom $uom, LinkingSpecs $specs = null){
+    public function addUom(Uom $uom, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($uom, $specs);
     }
 
@@ -245,7 +263,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addInvoiceIn(InvoiceIn $invoiceIn, LinkingSpecs $specs = null){
+    public function addInvoiceIn(InvoiceIn $invoiceIn, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($invoiceIn, $specs);
     }
 
@@ -255,7 +274,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addInvoiceOut(InvoiceOut $invoiceOut, LinkingSpecs $specs = null){
+    public function addInvoiceOut(InvoiceOut $invoiceOut, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($invoiceOut, $specs);
     }
 
@@ -265,7 +285,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addDemand(Demand $demand, LinkingSpecs $specs = null){
+    public function addDemand(Demand $demand, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($demand, $specs);
     }
 
@@ -275,7 +296,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addEnter(Enter $enter, LinkingSpecs $specs = null){
+    public function addEnter(Enter $enter, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($enter, $specs);
     }
 
@@ -285,7 +307,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addLoss(Loss $loss, LinkingSpecs $specs = null){
+    public function addLoss(Loss $loss, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($loss, $specs);
     }
 
@@ -295,7 +318,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addMove(Move $move, LinkingSpecs $specs = null){
+    public function addMove(Move $move, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($move, $specs);
     }
 
@@ -305,7 +329,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addSupply(Supply $supply, LinkingSpecs $specs = null){
+    public function addSupply(Supply $supply, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($supply, $specs);
     }
 
@@ -315,7 +340,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addCustomerOrder(CustomerOrder $customerOrder, LinkingSpecs $specs = null){
+    public function addCustomerOrder(CustomerOrder $customerOrder, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($customerOrder, $specs, LinkingSpecs::create([
             'name' => 'customerOrder'
         ]));
@@ -327,7 +353,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addPurchaseOrder(PurchaseOrder $purchaseOrder, LinkingSpecs $specs = null){
+    public function addPurchaseOrder(PurchaseOrder $purchaseOrder, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($purchaseOrder, $specs);
     }
 
@@ -337,7 +364,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addBonusprogram(Bonusprogram $bonusprogram, LinkingSpecs $specs = null){
+    public function addBonusprogram(Bonusprogram $bonusprogram, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($bonusprogram, $specs, LinkingSpecs::create([
             'name' => 'bonusProgram'
         ]));
@@ -349,7 +377,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addPaymentIn(PaymentIn $paymentIn, LinkingSpecs $specs = null){
+    public function addPaymentIn(PaymentIn $paymentIn, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($paymentIn, $specs);
     }
 
@@ -359,7 +388,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addPaymentOut(PaymentOut $paymentOut, LinkingSpecs $specs = null){
+    public function addPaymentOut(PaymentOut $paymentOut, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($paymentOut, $specs);
     }
 
@@ -369,7 +399,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addCustomerOrderPosition(CustomerOrderPosition $customerOrderPosition, LinkingSpecs $specs = null){
+    public function addCustomerOrderPosition(CustomerOrderPosition $customerOrderPosition, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($customerOrderPosition, $specs);
     }
 
@@ -379,7 +410,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addInventoryPosition(InventoryPosition $inventoryPosition, LinkingSpecs $specs = null){
+    public function addInventoryPosition(InventoryPosition $inventoryPosition, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($inventoryPosition, $specs);
     }
 
@@ -389,7 +421,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addEnterPosition(EnterPosition $enterPosition, LinkingSpecs $specs = null){
+    public function addEnterPosition(EnterPosition $enterPosition, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($enterPosition, $specs);
     }
 
@@ -399,7 +432,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addLossPosition(LossPosition $lossPosition, LinkingSpecs $specs = null){
+    public function addLossPosition(LossPosition $lossPosition, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($lossPosition, $specs);
     }
 
@@ -409,7 +443,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addMovePosition(MovePosition $movePosition, LinkingSpecs $specs = null){
+    public function addMovePosition(MovePosition $movePosition, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($movePosition, $specs);
     }
 
@@ -419,7 +454,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addRetailShift(RetailShift $retailShift, LinkingSpecs $specs = null){
+    public function addRetailShift(RetailShift $retailShift, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($retailShift, $specs);
     }
 
@@ -429,7 +465,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addProductFolder(ProductFolder $folder, LinkingSpecs $specs = null){
+    public function addProductFolder(ProductFolder $folder, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($folder, $specs, LinkingSpecs::create([
             'name' => 'productFolder'
         ]));
@@ -441,7 +478,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addAttribute(Attribute $attribute, LinkingSpecs $specs = null){
+    public function addAttribute(Attribute $attribute, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($attribute, $specs, LinkingSpecs::create([
             'multiple' => true,
             'name' => 'attributes'
@@ -454,7 +492,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addCharacteristics(Characteristics $characteristics, LinkingSpecs $specs = null){
+    public function addCharacteristics(Characteristics $characteristics, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($characteristics, $specs);
     }
 
@@ -464,7 +503,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addCompanySettings(CompanySettings $companySettings, LinkingSpecs $specs = null){
+    public function addCompanySettings(CompanySettings $companySettings, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($companySettings, $specs);
     }
 
@@ -474,7 +514,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addCustomEntity(CustomEntity $customEntity, LinkingSpecs $specs = null){
+    public function addCustomEntity(CustomEntity $customEntity, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($customEntity, $specs);
     }
 
@@ -484,7 +525,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addState(State $state, LinkingSpecs $specs = null){
+    public function addState(State $state, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($state, $specs);
     }
 
@@ -494,7 +536,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addConsignment(Consignment $consignment, LinkingSpecs $specs = null){
+    public function addConsignment(Consignment $consignment, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($consignment, $specs);
     }
 
@@ -504,7 +547,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addProduct(Product $product, LinkingSpecs $specs = null){
+    public function addProduct(Product $product, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($product, $specs);
     }
 
@@ -514,7 +558,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addBundle(Bundle $bundle, LinkingSpecs $specs = null){
+    public function addBundle(Bundle $bundle, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($bundle, $specs);
     }
 
@@ -524,7 +569,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addService(Service $service, LinkingSpecs $specs = null){
+    public function addService(Service $service, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($service, $specs);
     }
 
@@ -534,7 +580,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addVariant(Variant $variant, LinkingSpecs $specs = null){
+    public function addVariant(Variant $variant, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($variant, $specs);
     }
 
@@ -544,7 +591,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addCashIn(CashIn $cashIn, LinkingSpecs $specs = null){
+    public function addCashIn(CashIn $cashIn, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($cashIn, $specs);
     }
 
@@ -554,7 +602,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addCashOut(CashOut $cashOut, LinkingSpecs $specs = null){
+    public function addCashOut(CashOut $cashOut, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($cashOut, $specs);
     }
 
@@ -564,7 +613,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addRetailDemand(RetailDemand $demand, LinkingSpecs $specs = null){
+    public function addRetailDemand(RetailDemand $demand, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($demand, $specs);
     }
 
@@ -574,7 +624,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addRetailSalesReturn(RetailSalesReturn $retailSalesReturn, LinkingSpecs $specs = null){
+    public function addRetailSalesReturn(RetailSalesReturn $retailSalesReturn, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($retailSalesReturn, $specs);
     }
 
@@ -584,7 +635,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addRetailDrawerCashIn(RetailDrawerCashIn $cashIn, LinkingSpecs $specs = null){
+    public function addRetailDrawerCashIn(RetailDrawerCashIn $cashIn, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($cashIn, $specs);
     }
 
@@ -594,7 +646,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addRetailDrawerCashOut(RetailDrawerCashOut $cashOut, LinkingSpecs $specs = null){
+    public function addRetailDrawerCashOut(RetailDrawerCashOut $cashOut, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($cashOut, $specs);
     }
 
@@ -604,7 +657,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addSalesReturn(SalesReturn $return, LinkingSpecs $specs = null){
+    public function addSalesReturn(SalesReturn $return, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($return, $specs);
     }
 
@@ -614,7 +668,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addPurchaseReturn(PurchaseReturn $return, LinkingSpecs $specs = null){
+    public function addPurchaseReturn(PurchaseReturn $return, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($return, $specs);
     }
 
@@ -624,7 +679,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addFactureIn(FactureIn $factureIn, LinkingSpecs $specs = null){
+    public function addFactureIn(FactureIn $factureIn, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($factureIn, $specs);
     }
 
@@ -634,7 +690,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addFactureOut(FactureOut $factureOut, LinkingSpecs $specs = null){
+    public function addFactureOut(FactureOut $factureOut, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($factureOut, $specs);
     }
 
@@ -644,7 +701,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addInventory(Inventory $inventory, LinkingSpecs $specs = null){
+    public function addInventory(Inventory $inventory, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($inventory, $specs);
     }
 
@@ -654,7 +712,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addProcessing(Processing $processing, LinkingSpecs $specs = null){
+    public function addProcessing(Processing $processing, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($processing, $specs);
     }
 
@@ -664,7 +723,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addProcessingPlan(ProcessingPlan $plan, LinkingSpecs $specs = null){
+    public function addProcessingPlan(ProcessingPlan $plan, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($plan, $specs);
     }
 
@@ -674,7 +734,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addProcessingOrder(ProcessingOrder $order, LinkingSpecs $specs = null){
+    public function addProcessingOrder(ProcessingOrder $order, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($order, $specs);
     }
 
@@ -684,7 +745,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addPriceList(PriceList $list, LinkingSpecs $specs = null){
+    public function addPriceList(PriceList $list, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($list, $specs);
     }
 
@@ -692,8 +754,9 @@ abstract class AbstractMutationBuilder{
      * @param EntityList $positions
      * @return $this
      */
-    public function addPositionList(EntityList $positions){
-        $positions->each(function(AbstractProduct $position){
+    public function addPositionList(EntityList $positions)
+    {
+        $positions->each(function (AbstractProduct $position) {
             $position->assortment = [
                 'meta' => $position->getMeta()
             ];
@@ -712,8 +775,9 @@ abstract class AbstractMutationBuilder{
      * @param EntityList $positions
      * @return $this
      */
-    public function addComponentsList(EntityList $positions){
-        $positions->each(function(AbstractProduct $position){
+    public function addComponentsList(EntityList $positions)
+    {
+        $positions->each(function (AbstractProduct $position) {
             $position->assortment = [
                 'meta' => $position->getMeta()
             ];
@@ -734,7 +798,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addConsignee(Counterparty $counterparty, LinkingSpecs $specs = null){
+    public function addConsignee(Counterparty $counterparty, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($counterparty, $specs, LinkingSpecs::create([
             'name' => 'consignee'
         ]));
@@ -746,7 +811,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addCarrier(Counterparty $counterparty, LinkingSpecs $specs = null){
+    public function addCarrier(Counterparty $counterparty, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($counterparty, $specs, LinkingSpecs::create([
             'name' => 'carrier'
         ]));
@@ -771,7 +837,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addTargetStore(Store $store, LinkingSpecs $specs = null){
+    public function addTargetStore(Store $store, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($store, $specs, LinkingSpecs::create([
             'name' => 'targetStore'
         ]));
@@ -783,7 +850,8 @@ abstract class AbstractMutationBuilder{
      * @return AbstractMutationBuilder
      * @throws \Exception
      */
-    public function addSourceStore(Store $store, LinkingSpecs $specs = null){
+    public function addSourceStore(Store $store, LinkingSpecs $specs = null)
+    {
         return $this->simpleLink($store, $specs, LinkingSpecs::create([
             'name' => 'sourceStore'
         ]));
@@ -797,13 +865,14 @@ abstract class AbstractMutationBuilder{
      * @return $this
      * @throws \Exception
      */
-    protected function simpleLink(AbstractEntity $linkedEntity, LinkingSpecs $specs = null, LinkingSpecs $defaultSpecs = null){
-        if ( !$specs ) {
+    protected function simpleLink(AbstractEntity $linkedEntity, LinkingSpecs $specs = null, LinkingSpecs $defaultSpecs = null)
+    {
+        if (!$specs) {
             $newSpecs = LinkingSpecs::create([]);
         } else {
             $newSpecs = $specs;
         }
-        if ( $defaultSpecs ){
+        if ($defaultSpecs) {
             $newSpecs = $defaultSpecs->mergeWith($newSpecs);
         }
         $this->e->links->link($linkedEntity, $newSpecs);

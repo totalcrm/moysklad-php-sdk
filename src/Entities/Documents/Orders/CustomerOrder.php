@@ -1,8 +1,9 @@
 <?php
 
-namespace MoySklad\Entities\Documents\Orders;
+namespace TotalCRM\MoySklad\Entities\Documents\Orders;
 
 
-class CustomerOrder extends AbstractOrder  {
+class CustomerOrder extends AbstractOrder
+{
     public static $entityName = 'customerorder';
 }

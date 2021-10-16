@@ -2,9 +2,9 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Entities\Counterparty;
-use MoySklad\Exceptions\Relations\RelationDoesNotExistException;
-use MoySklad\Lists\RelationEntityList;
+use TotalCRM\MoySklad\Entities\Counterparty;
+use TotalCRM\MoySklad\Exceptions\Relations\RelationDoesNotExistException;
+use TotalCRM\MoySklad\Lists\RelationEntityList;
 
 require_once "TestCase.php";
 

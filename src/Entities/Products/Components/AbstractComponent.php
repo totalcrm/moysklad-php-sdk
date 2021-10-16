@@ -1,9 +1,10 @@
 <?php
 
-namespace MoySklad\Entities\Products\Components;
+namespace TotalCRM\MoySklad\Entities\Products\Components;
 
-use MoySklad\Entities\Products\AbstractProduct;
+use TotalCRM\MoySklad\Entities\Products\AbstractProduct;
 
-class AbstractComponent extends AbstractProduct{
+class AbstractComponent extends AbstractProduct
+{
     public static $entityName = 'a_component';
 }

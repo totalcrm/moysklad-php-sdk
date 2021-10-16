@@ -1,8 +1,8 @@
 <?php
 
-namespace MoySklad\Entities\Documents\CommissionReports;
+namespace TotalCRM\MoySklad\Entities\Documents\CommissionReports;
 
-
-class CommissionReportOut extends AbstractCommissionReport {
+class CommissionReportOut extends AbstractCommissionReport
+{
     public static $entityName = 'commissionreportout';
 }

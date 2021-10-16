@@ -2,8 +2,8 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Entities\Organization;
-use MoySklad\MoySklad;
+use TotalCRM\MoySklad\Entities\Organization;
+use TotalCRM\MoySklad\MoySklad;
 use Tests\Config;
 
 require_once "TestCase.php";

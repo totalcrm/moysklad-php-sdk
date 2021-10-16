@@ -1,26 +1,29 @@
 <?php
 
-namespace MoySklad\Components\Http;
+namespace TotalCRM\MoySklad\Components\Http;
 
-abstract class RequestLog{
+abstract class RequestLog
+{
     private static
         $history = [],
         $total = 0,
         $storageSize = 50,
         $enabled = true;
 
-    public static function setStorageSize($size){
-        if ( is_int($size) ) self::$storageSize = $size;
+    public static function setStorageSize($size)
+    {
+        if (is_int($size)) self::$storageSize = $size;
     }
 
     /**
      * @param $row
      */
-    public static function add($row){
-        if ( !self::$enabled ) return;
+    public static function add($row)
+    {
+        if (!self::$enabled) return;
         self::$total++;
         self::$history[] = $row;
-        if ( self::$storageSize !== 0 && count(self::$history) > self::$storageSize ){
+        if (self::$storageSize !== 0 && count(self::$history) > self::$storageSize) {
             array_shift(self::$history);
         }
     }
@@ -28,17 +31,19 @@ abstract class RequestLog{
     /**
      * @param $row
      */
-    public static function replaceLast($row){
-        if ( !self::$enabled ) return;
+    public static function replaceLast($row)
+    {
+        if (!self::$enabled) return;
         self::$history[count(self::$history) - 1] = $row;
     }
 
     /**
      * @return mixed|null
      */
-    public static function getLast(){
+    public static function getLast()
+    {
         $idx = count(self::$history) - 1;
-        if ( $idx >= 0 ){
+        if ($idx >= 0) {
             return self::$history[$idx];
         }
         return null;
@@ -47,8 +52,9 @@ abstract class RequestLog{
     /**
      * @return array
      */
-    public static function getRequestList(){
-        return array_map(function($row){
+    public static function getRequestList()
+    {
+        return array_map(function ($row) {
             return $row['req'];
         }, self::$history);
     }
@@ -56,7 +62,8 @@ abstract class RequestLog{
     /**
      * @return array
      */
-    public static function getList(){
+    public static function getList()
+    {
         return [
             "history" => self::$history,
             "total" => self::$total
@@ -68,7 +75,8 @@ abstract class RequestLog{
      * @param bool $enabled
      * @return array
      */
-    public static function setEnabled($enabled){
+    public static function setEnabled($enabled)
+    {
         self::$enabled = $enabled;
     }
 }

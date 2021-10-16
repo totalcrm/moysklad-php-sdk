@@ -1,13 +1,14 @@
 <?php
 
-namespace MoySklad\Exceptions;
+namespace TotalCRM\MoySklad\Exceptions;
 
 /**
  * Request did not fail, but response contained "errors" field
  * Class ApiResponseException
  * @package MoySklad\Exceptions
  */
-class ApiResponseException extends RequestFailedException{
+class ApiResponseException extends RequestFailedException
+{
     protected
         $code,
         $errorText,
@@ -22,15 +23,18 @@ class ApiResponseException extends RequestFailedException{
         $this->moreInfo = $error->moreInfo;
     }
 
-    public function getApiCode(){
+    public function getApiCode()
+    {
         return $this->code;
     }
 
-    public function getErrorText(){
+    public function getErrorText()
+    {
         return $this->errorText;
     }
 
-    public function getMoreInfo(){
+    public function getMoreInfo()
+    {
         return $this->moreInfo;
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
-namespace MoySklad\Entities\Documents\PriceLists;
+namespace TotalCRM\MoySklad\Entities\Documents\PriceLists;
 
-use MoySklad\Entities\Documents\AbstractDocument;
-use MoySklad\Entities\Organization;
+use TotalCRM\MoySklad\Entities\Documents\AbstractDocument;
+use TotalCRM\MoySklad\Entities\Organization;
 
-class PriceListRow extends AbstractDocument {
+class PriceListRow extends AbstractDocument
+{
     public static $entityName = 'pricelistrow';
 }

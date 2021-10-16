@@ -1,21 +1,23 @@
 <?php
 
-namespace MoySklad\Components\MutationBuilders;
+namespace TotalCRM\MoySklad\Components\MutationBuilders;
 
-use MoySklad\Components\MassRequest;
-use MoySklad\Components\Specs\CreationSpecs;
-use MoySklad\Entities\AbstractEntity;
-use MoySklad\Exceptions\IncompleteCreationFieldsException;
+use TotalCRM\MoySklad\Components\MassRequest;
+use TotalCRM\MoySklad\Components\Specs\CreationSpecs;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Exceptions\IncompleteCreationFieldsException;
 
-class CreationBuilder extends AbstractMutationBuilder {
+class CreationBuilder extends AbstractMutationBuilder
+{
     /**
      * @var CreationSpecs
      */
     protected $specs;
 
-    public function __construct(AbstractEntity &$entity, CreationSpecs &$specs = null){
+    public function __construct(AbstractEntity &$entity, CreationSpecs &$specs = null)
+    {
         parent::__construct($entity);
-        if ( !$specs ) $specs = CreationSpecs::create();
+        if (!$specs) $specs = CreationSpecs::create();
         $this->specs = $specs;
     }
 

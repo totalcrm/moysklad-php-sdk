@@ -1,15 +1,16 @@
 <?php
 
-namespace MoySklad\Components\Specs;
+namespace TotalCRM\MoySklad\Components\Specs;
 
-use MoySklad\Exceptions\UnknownSpecException;
+use TotalCRM\MoySklad\Exceptions\UnknownSpecException;
 
 /**
  * Specs are used as parameters
  * Class AbstractSpecs
  * @package MoySklad\Components\Specs
  */
-abstract class AbstractSpecs{
+abstract class AbstractSpecs
+{
     protected static $cachedDefaultSpecs = null;
 
     /**
@@ -20,16 +21,16 @@ abstract class AbstractSpecs{
     protected function __construct($specs = [])
     {
         $defaults = $this->getDefaults();
-        foreach ( $defaults as $k=>$v ) {
+        foreach ($defaults as $k => $v) {
             $this->{$k} = $v;
         }
-        foreach ( $specs as $specName=>$spec ){
-            if ( !array_key_exists($specName, $defaults) ){
+        foreach ($specs as $specName => $spec) {
+            if (!array_key_exists($specName, $defaults)) {
                 throw new UnknownSpecException($specName);
             }
             $this->{$specName} = $spec;
         }
-        if ( empty($specs) ){
+        if (empty($specs)) {
             static::$cachedDefaultSpecs = $this;
         }
     }
@@ -39,9 +40,10 @@ abstract class AbstractSpecs{
      * @param array $specs
      * @return static
      */
-    public static function create($specs = []){
+    public static function create($specs = [])
+    {
         $cl = get_called_class();
-        if ( empty($specs) && $cl::$cachedDefaultSpecs !== null){
+        if (empty($specs) && $cl::$cachedDefaultSpecs !== null) {
             return $cl::$cachedDefaultSpecs;
         }
         return new static($specs);
@@ -52,11 +54,12 @@ abstract class AbstractSpecs{
      * @param static $otherSpecs
      * @return static
      */
-    public function mergeWith($otherSpecs){
+    public function mergeWith($otherSpecs)
+    {
         $defaults = static::getDefaults();
         $newSpecs = $this->toArray();
-        foreach ($otherSpecs as $key => $otherSpec){
-            if ( $otherSpec !== $defaults[$key] ){
+        foreach ($otherSpecs as $key => $otherSpec) {
+            if ($otherSpec !== $defaults[$key]) {
                 $newSpecs[$key] = $otherSpec;
             }
         }
@@ -67,7 +70,8 @@ abstract class AbstractSpecs{
      * Converts itself to array
      * @return array
      */
-    public function toArray(){
+    public function toArray()
+    {
         return (array)$this;
     }
 

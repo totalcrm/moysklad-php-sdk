@@ -3,9 +3,9 @@
 namespace Tests\Cases;
 
 use Faker\Generator;
-use MoySklad\Components\Http\RequestLog;
-use MoySklad\Exceptions\RequestFailedException;
-use MoySklad\MoySklad;
+use TotalCRM\MoySklad\Components\Http\RequestLog;
+use TotalCRM\MoySklad\Exceptions\RequestFailedException;
+use TotalCRM\MoySklad\MoySklad;
 use Tests\Config;
 use Faker\Factory as Faker;
 

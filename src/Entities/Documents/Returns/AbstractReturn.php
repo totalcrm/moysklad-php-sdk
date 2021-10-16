@@ -1,9 +1,10 @@
 <?php
 
-namespace MoySklad\Entities\Documents\Returns;
+namespace TotalCRM\MoySklad\Entities\Documents\Returns;
 
-use MoySklad\Entities\Documents\AbstractDocument;
+use TotalCRM\MoySklad\Entities\Documents\AbstractDocument;
 
-class AbstractReturn extends AbstractDocument{
+class AbstractReturn extends AbstractDocument
+{
     public static $entityName = 'a_return';
 }

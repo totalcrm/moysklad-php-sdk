@@ -1,10 +1,11 @@
 <?php
 
-namespace MoySklad\Entities\Misc;
+namespace TotalCRM\MoySklad\Entities\Misc;
 
-use MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
 
-class Publication extends AbstractEntity  {
+class Publication extends AbstractEntity
+{
     public static $entityName = 'operationpublication';
 
     public static function getFieldsRequiredForCreation()

@@ -1,15 +1,16 @@
 <?php
 
-namespace MoySklad\Components\Http;
+namespace TotalCRM\MoySklad\Components\Http;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use MoySklad\Exceptions\ApiResponseException;
-use MoySklad\Exceptions\PosTokenException;
-use MoySklad\Exceptions\RequestFailedException;
-use MoySklad\Exceptions\ResponseParseException;
+use TotalCRM\MoySklad\Exceptions\ApiResponseException;
+use TotalCRM\MoySklad\Exceptions\PosTokenException;
+use TotalCRM\MoySklad\Exceptions\RequestFailedException;
+use TotalCRM\MoySklad\Exceptions\ResponseParseException;
 
-class MoySkladHttpClient{
+class MoySkladHttpClient
+{
     const
         METHOD_GET = "GET",
         METHOD_POST = "POST",
@@ -33,7 +34,8 @@ class MoySkladHttpClient{
         $this->endpoint = "https://" . $subdomain . ".moysklad.ru/api/remap/1.1/";
     }
 
-    public function setPosToken($posToken){
+    public function setPosToken($posToken)
+    {
         $this->posToken = $posToken;
     }
 
@@ -44,7 +46,8 @@ class MoySkladHttpClient{
      * @return string
      * @throws \Throwable
      */
-    public function get($method, $payload = [], $options = null){
+    public function get($method, $payload = [], $options = null)
+    {
         return $this->makeRequest(
             self::METHOD_GET,
             $method,
@@ -60,7 +63,8 @@ class MoySkladHttpClient{
      * @return string
      * @throws \Throwable
      */
-    public function post($method, $payload = [], $options = null){
+    public function post($method, $payload = [], $options = null)
+    {
         return $this->makeRequest(
             self::METHOD_POST,
             $method,
@@ -76,7 +80,8 @@ class MoySkladHttpClient{
      * @return string
      * @throws \Throwable
      */
-    public function put($method, $payload = [], $options = null){
+    public function put($method, $payload = [], $options = null)
+    {
         return $this->makeRequest(
             self::METHOD_PUT,
             $method,
@@ -92,7 +97,8 @@ class MoySkladHttpClient{
      * @return string
      * @throws \Throwable
      */
-    public function delete($method, $payload = [], $options = null){
+    public function delete($method, $payload = [], $options = null)
+    {
         return $this->makeRequest(
             self::METHOD_DELETE,
             $method,
@@ -106,7 +112,8 @@ class MoySkladHttpClient{
      * @param $options
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getRaw($link, $options) {
+    public function getRaw($link, $options)
+    {
         if (empty($options['headers']['Authorization'])) {
             $options['headers']['Authorization'] = "Basic " . base64_encode($this->login . ':' . $this->password);
         }
@@ -115,15 +122,18 @@ class MoySkladHttpClient{
         return $client->get($link, $options);
     }
 
-    public function getLastRequest(){
+    public function getLastRequest()
+    {
         return RequestLog::getLast();
     }
 
-    public function getRequestList(){
+    public function getRequestList()
+    {
         return RequestLog::getList();
     }
 
-    public function setPreRequestTimeout($ms){
+    public function setPreRequestTimeout($ms)
+    {
         $this->preRequestSleepTime = $ms;
     }
 
@@ -140,13 +150,14 @@ class MoySkladHttpClient{
         $apiMethod,
         $data = [],
         $options = null
-    ){
-        if ( !$options ) $options = new RequestConfig();
+    )
+    {
+        if (!$options) $options = new RequestConfig();
 
         $password = $this->password;
-        if ( $options->get('usePosApi') ){
-            if ( $options->get('usePosToken') ){
-                if ( empty($this->posToken) ){
+        if ($options->get('usePosApi')) {
+            if ($options->get('usePosToken')) {
+                if (empty($this->posToken)) {
                     throw new PosTokenException();
                 }
                 $password = $this->posToken;
@@ -164,7 +175,7 @@ class MoySkladHttpClient{
             "headers" => $headers
         ];
 
-        if ( !$options->get('followRedirects') ){
+        if (!$options->get('followRedirects')) {
             $config['allow_redirects'] = false;
         }
 
@@ -174,18 +185,18 @@ class MoySkladHttpClient{
             self::METHOD_DELETE
         ];
         $requestBody = [];
-        if ( $options->get('ignoreRequestBody') === false ){
-            if ( $requestHttpMethod === self::METHOD_GET ){
+        if ($options->get('ignoreRequestBody') === false) {
+            if ($requestHttpMethod === self::METHOD_GET) {
                 $requestBody['query'] = $data;
-            } else if ( in_array($requestHttpMethod, $jsonRequestsTypes) ){
+            } else if (in_array($requestHttpMethod, $jsonRequestsTypes)) {
                 $requestBody['json'] = $data;
             }
         }
 
         $serializedRequest = (
-            isset($requestBody['json'])?
-                \json_decode(\json_encode($requestBody['json'])):
-                $requestBody['query']
+        isset($requestBody['json']) ?
+            \json_decode(\json_encode($requestBody['json'])) :
+            $requestBody['query']
         );
         $reqLog = [
             "req" => [
@@ -197,24 +208,24 @@ class MoySkladHttpClient{
         ];
         RequestLog::add($reqLog);
         $client = new Client($config);
-        try{
+        try {
             usleep($this->preRequestSleepTime);
             $res = $client->request(
                 $requestHttpMethod,
                 $apiMethod,
                 $requestBody
             );
-            if ( in_array($res->getStatusCode(), self::HTTP_CODE_SUCCESS) ){
+            if (in_array($res->getStatusCode(), self::HTTP_CODE_SUCCESS)) {
                 $reqLog['resHeaders'] = $res->getHeaders();
-                if ( $requestHttpMethod !== self::METHOD_DELETE ){
-                    if ( !$options->get('followRedirects') ){
+                if ($requestHttpMethod !== self::METHOD_DELETE) {
+                    if (!$options->get('followRedirects')) {
                         RequestLog::replaceLast($reqLog);
                         $location = $res->getHeader('Location');
-                        if ( isset($location[0]) ) return $location[0];
+                        if (isset($location[0])) return $location[0];
                         return "";
                     } else {
                         $result = \json_decode($res->getBody());
-                        if ( is_null($result) === false ){
+                        if (is_null($result) === false) {
                             $reqLog['res'] = $result;
                             RequestLog::replaceLast($reqLog);
                             return $result;
@@ -227,13 +238,13 @@ class MoySkladHttpClient{
             } else {
                 throw new RequestFailedException($reqLog['req'], $res);
             }
-        } catch (\Throwable $e){
-            if ( $e instanceof ClientException){
+        } catch (\Throwable $e) {
+            if ($e instanceof ClientException) {
                 $req = $reqLog['req'];
                 $res = $e->getResponse()->getBody()->getContents();
                 $except = new RequestFailedException($req, $res);
-                if ( $res = \json_decode($res) ){
-                    if ( isset($res->errors) || (is_array($res) && isset($res[0]->errors))){
+                if ($res = \json_decode($res)) {
+                    if (isset($res->errors) || (is_array($res) && isset($res[0]->errors))) {
                         $except = new ApiResponseException($req, $res);
                     }
                 }

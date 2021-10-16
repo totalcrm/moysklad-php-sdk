@@ -1,13 +1,14 @@
 <?php
 
-namespace MoySklad\Entities\Pos;
+namespace TotalCRM\MoySklad\Entities\Pos;
 
-use MoySklad\Components\Http\RequestConfig;
-use MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
-use MoySklad\Entities\AbstractEntity;
-use MoySklad\MoySklad;
+use TotalCRM\MoySklad\Components\Http\RequestConfig;
+use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\MoySklad;
 
-abstract class PosEntity extends AbstractEntity{
+abstract class PosEntity extends AbstractEntity
+{
     public static $entityName = "_a_pos";
     protected static $usePosTokenAuth = false;
 

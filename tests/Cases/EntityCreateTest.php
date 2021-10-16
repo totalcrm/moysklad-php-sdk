@@ -3,13 +3,13 @@
 namespace Tests\Cases;
 
 
-use MoySklad\Components\Http\RequestLog;
-use MoySklad\Components\Specs\LinkingSpecs;
-use MoySklad\Entities\Currency;
-use MoySklad\Entities\Folders\ProductFolder;
-use MoySklad\Entities\Misc\Characteristics;
-use MoySklad\Entities\Products\Product;
-use MoySklad\Entities\Products\Variant;
+use TotalCRM\MoySklad\Components\Http\RequestLog;
+use TotalCRM\MoySklad\Components\Specs\LinkingSpecs;
+use TotalCRM\MoySklad\Entities\Currency;
+use TotalCRM\MoySklad\Entities\Folders\ProductFolder;
+use TotalCRM\MoySklad\Entities\Misc\Characteristics;
+use TotalCRM\MoySklad\Entities\Products\Product;
+use TotalCRM\MoySklad\Entities\Products\Variant;
 
 require_once "TestCase.php";
 

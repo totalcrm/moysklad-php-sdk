@@ -2,11 +2,11 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
-use MoySklad\Entities\Audit\Audit;
-use MoySklad\Entities\Audit\AuditEvent;
-use MoySklad\Entities\Documents\Orders\CustomerOrder;
-use MoySklad\Lists\RelationEntityList;
+use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
+use TotalCRM\MoySklad\Entities\Audit\Audit;
+use TotalCRM\MoySklad\Entities\Audit\AuditEvent;
+use TotalCRM\MoySklad\Entities\Documents\Orders\CustomerOrder;
+use TotalCRM\MoySklad\Lists\RelationEntityList;
 
 require_once "TestCase.php";
 

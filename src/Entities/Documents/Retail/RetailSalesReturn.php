@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Entities\Documents\Retail;
+namespace TotalCRM\MoySklad\Entities\Documents\Retail;
 
-class RetailSalesReturn extends AbstractRetail{
+class RetailSalesReturn extends AbstractRetail
+{
     public static $entityName = 'retailsalesreturn';
 }

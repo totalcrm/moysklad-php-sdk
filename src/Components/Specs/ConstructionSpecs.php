@@ -1,9 +1,10 @@
 <?php
 
-namespace MoySklad\Components\Specs;
+namespace TotalCRM\MoySklad\Components\Specs;
 
 
-class ConstructionSpecs extends AbstractSpecs {
+class ConstructionSpecs extends AbstractSpecs
+{
     protected static $cachedDefaultSpecs = null;
 
     /**
@@ -14,7 +15,7 @@ class ConstructionSpecs extends AbstractSpecs {
     public function getDefaults()
     {
         return [
-          "relations" => true
+            "relations" => true
         ];
     }
 }

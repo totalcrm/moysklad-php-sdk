@@ -1,7 +1,8 @@
 <?php
 
-namespace MoySklad\Interfaces;
+namespace TotalCRM\MoySklad\Interfaces;
 
-interface DoesNotSupportMutationInterface{
+interface DoesNotSupportMutationInterface
+{
 
 }

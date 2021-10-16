@@ -1,11 +1,12 @@
 <?php
 
-namespace MoySklad\Components\Specs\QuerySpecs;
+namespace TotalCRM\MoySklad\Components\Specs\QuerySpecs;
 
-use MoySklad\Components\Specs\AbstractSpecs;
-use MoySklad\Utils\CommonDate;
+use TotalCRM\MoySklad\Components\Specs\AbstractSpecs;
+use TotalCRM\MoySklad\Utils\CommonDate;
 
-class QuerySpecs extends AbstractSpecs {
+class QuerySpecs extends AbstractSpecs
+{
     protected static $cachedDefaultSpecs = null;
     const MAX_LIST_LIMIT = 100;
 
@@ -42,20 +43,20 @@ class QuerySpecs extends AbstractSpecs {
      */
     public static function create($specs = [])
     {
-        if ( isset($specs['limit']) && $specs['limit'] > self::MAX_LIST_LIMIT ) $specs['limit'] = self::MAX_LIST_LIMIT;
+        if (isset($specs['limit']) && $specs['limit'] > self::MAX_LIST_LIMIT) $specs['limit'] = self::MAX_LIST_LIMIT;
         $res = parent::create($specs);
-        if ( $res->maxResults !== 0 && $res->maxResults < $res->limit ) {
+        if ($res->maxResults !== 0 && $res->maxResults < $res->limit) {
             $res->limit = $res->maxResults;
         }
-        try{
-            foreach ( ['updatedFrom', 'updatedTo'] as $date ){
-                if ( $res->{$date} !== null ) {
-                    if ( is_string($res->{$date}) ) $res->{$date} = new CommonDate($res->{$date});
+        try {
+            foreach (['updatedFrom', 'updatedTo'] as $date) {
+                if ($res->{$date} !== null) {
+                    if (is_string($res->{$date})) $res->{$date} = new CommonDate($res->{$date});
                     $res->{$date} = $res->{$date}->format();
                 }
             }
-        } catch ( \Throwable $e ){
-            throw new \Exception('"updatedFrom" and "updatedTo" specs should be instances of "'.CommonDate::class.'" class');
+        } catch (\Throwable $e) {
+            throw new \Exception('"updatedFrom" and "updatedTo" specs should be instances of "' . CommonDate::class . '" class');
         }
 
         return $res;
@@ -68,12 +69,12 @@ class QuerySpecs extends AbstractSpecs {
     public function toArray()
     {
         $res = parent::toArray();
-        if ( !empty($this->expand) ){
+        if (!empty($this->expand)) {
             $res['expand'] = $this->expand->flatten();
         }
-        foreach ( $res as $k=>$v ){
-            if ( $v === null ) unset($res->{$k});
-            if ( $v instanceof CommonDate ){
+        foreach ($res as $k => $v) {
+            if ($v === null) unset($res->{$k});
+            if ($v instanceof CommonDate) {
                 $res->{$k} = $v->format();
             }
         }

@@ -2,12 +2,12 @@
 
 namespace Tests\Cases;
 
-use MoySklad\Components\FilterQuery;
-use MoySklad\Components\Http\RequestLog;
-use MoySklad\Components\Specs\QuerySpecs;
-use MoySklad\Entities\Products\Product;
-use MoySklad\Entities\Products\Variant;
-use MoySklad\MoySklad;
+use TotalCRM\MoySklad\Components\FilterQuery;
+use TotalCRM\MoySklad\Components\Http\RequestLog;
+use TotalCRM\MoySklad\Components\Specs\QuerySpecs;
+use TotalCRM\MoySklad\Entities\Products\Product;
+use TotalCRM\MoySklad\Entities\Products\Variant;
+use TotalCRM\MoySklad\MoySklad;
 use Tests\Config;
 
 require_once "TestCase.php";

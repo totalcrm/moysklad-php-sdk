@@ -1,20 +1,21 @@
 <?php
 
-namespace MoySklad\Components\Query;
+namespace TotalCRM\MoySklad\Components\Query;
 
-use MoySklad\Components\Expand;
-use MoySklad\Components\Fields\MetaField;
-use MoySklad\Components\FilterQuery;
-use MoySklad\Components\Http\RequestConfig;
-use MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
-use MoySklad\Lists\EntityList;
-use MoySklad\MoySklad;
-use MoySklad\Registers\ApiUrlRegistry;
-use MoySklad\Traits\AccessesSkladInstance;
+use TotalCRM\MoySklad\Components\Expand;
+use TotalCRM\MoySklad\Components\Fields\MetaField;
+use TotalCRM\MoySklad\Components\FilterQuery;
+use TotalCRM\MoySklad\Components\Http\RequestConfig;
+use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
+use TotalCRM\MoySklad\Lists\EntityList;
+use TotalCRM\MoySklad\MoySklad;
+use TotalCRM\MoySklad\Registers\ApiUrlRegistry;
+use TotalCRM\MoySklad\Traits\AccessesSkladInstance;
 
-abstract class AbstractQuery{
+abstract class AbstractQuery
+{
     use AccessesSkladInstance;
-    
+
     protected
         $entityClass,
         $entityName,
@@ -41,7 +42,7 @@ abstract class AbstractQuery{
         $this->skladHashCode = $skladInstance->hashCode();
         $this->entityClass = $entityClass;
         $this->entityName = $entityClass::$entityName;
-        if ( !$querySpecs ) $querySpecs = QuerySpecs::create([]);
+        if (!$querySpecs) $querySpecs = QuerySpecs::create([]);
         $this->querySpecs = $querySpecs;
         $this->responseAttributes = ['meta' => null];
     }
@@ -51,7 +52,8 @@ abstract class AbstractQuery{
      * @param Expand $expand
      * @return $this
      */
-    public function withExpand(Expand $expand){
+    public function withExpand(Expand $expand)
+    {
         $this->expand = $expand;
         return $this;
     }
@@ -61,7 +63,8 @@ abstract class AbstractQuery{
      * @param $customQueryUrl
      * @return $this
      */
-    public function setCustomQueryUrl($customQueryUrl){
+    public function setCustomQueryUrl($customQueryUrl)
+    {
         $this->customQueryUrl = $customQueryUrl;
         return $this;
     }
@@ -70,7 +73,8 @@ abstract class AbstractQuery{
      * @param RequestConfig $options
      * @return $this
      */
-    public function setRequestOptions(RequestConfig $options){
+    public function setRequestOptions(RequestConfig $options)
+    {
         $this->requestOptions = $options;
         return $this;
     }
@@ -80,8 +84,9 @@ abstract class AbstractQuery{
      * @param $method
      * @return $this
      */
-    public function setResponseAttributesMapper($fnOrClass, $method = null){
-        if ( is_string($fnOrClass) ){
+    public function setResponseAttributesMapper($fnOrClass, $method = null)
+    {
+        if (is_string($fnOrClass)) {
             $fn = "$fnOrClass::$method";
         } else {
             $fn = $fnOrClass;
@@ -95,7 +100,8 @@ abstract class AbstractQuery{
      * @return EntityList
      * @throws \Exception
      */
-    public function getList(){
+    public function getList()
+    {
         return $this->filter(null);
     }
 
@@ -105,9 +111,10 @@ abstract class AbstractQuery{
      * @return EntityList
      * @throws \Exception
      */
-    public function search($searchString = ''){
+    public function search($searchString = '')
+    {
         $this->attachExpand($this->querySpecs);
-        $queryResult = static::recursiveRequest(function(QuerySpecs $querySpecs, $searchString){
+        $queryResult = static::recursiveRequest(function (QuerySpecs $querySpecs, $searchString) {
             $query = array_merge($querySpecs->toArray(), [
                 "search" => $searchString
             ]);
@@ -125,10 +132,11 @@ abstract class AbstractQuery{
      * @return EntityList
      * @throws \Exception
      */
-    public function filter( FilterQuery $filterQuery = null ){
+    public function filter(FilterQuery $filterQuery = null)
+    {
         $this->attachExpand($this->querySpecs);
-        $queryResult = static::recursiveRequest(function(QuerySpecs $querySpecs, FilterQuery $filterQuery = null){
-            if ( $filterQuery ){
+        $queryResult = static::recursiveRequest(function (QuerySpecs $querySpecs, FilterQuery $filterQuery = null) {
+            if ($filterQuery) {
                 $query = array_merge($querySpecs->toArray(), [
                     "filter" => $filterQuery->getRaw()
                 ]);
@@ -154,19 +162,20 @@ abstract class AbstractQuery{
      */
     protected function recursiveRequest(
         callable $method, QuerySpecs $queryParams, $methodArgs = [], $requestCounter = 1
-    ){
+    )
+    {
         $res = call_user_func_array($method, array_merge([$queryParams], $methodArgs));
         $resultingMeta = $this->mapIntermediateResponseAttributes($res);
         /**
          * @var EntityList $resultingObjects
          */
         $resultingObjects = (new static::$entityListClass($this->getSkladInstance(), $res->rows, $resultingMeta))
-            ->map(function($e) {
+            ->map(function ($e) {
                 return new $this->entityClass($this->getSkladInstance(), $e);
             });
-        if ( $resultingMeta->size > $queryParams->limit + $queryParams->offset ){
+        if ($resultingMeta->size > $queryParams->limit + $queryParams->offset) {
             $newQueryParams = $this->recreateQuerySpecs($queryParams);
-            if ( $queryParams->maxResults === 0 || $queryParams->maxResults > $requestCounter * $queryParams->limit ){
+            if ($queryParams->maxResults === 0 || $queryParams->maxResults > $requestCounter * $queryParams->limit) {
                 $resultingObjects = $resultingObjects->merge(
                     static::recursiveRequest($method, $newQueryParams, $methodArgs, ++$requestCounter)
                 );
@@ -181,22 +190,24 @@ abstract class AbstractQuery{
      * @return QuerySpecs
      * @throws \Exception
      */
-    protected function recreateQuerySpecs(QuerySpecs &$queryParams){
-          return QuerySpecs::create([
-              "offset" => $queryParams->offset + QuerySpecs::MAX_LIST_LIMIT,
-              "limit" => $queryParams->limit,
-              "maxResults" => $queryParams->maxResults,
-              "expand" => $this->expand
-          ]);
+    protected function recreateQuerySpecs(QuerySpecs &$queryParams)
+    {
+        return QuerySpecs::create([
+            "offset" => $queryParams->offset + QuerySpecs::MAX_LIST_LIMIT,
+            "limit" => $queryParams->limit,
+            "maxResults" => $queryParams->maxResults,
+            "expand" => $this->expand
+        ]);
     }
 
     /**
      * Get default list query url, or use custom one
      * @return null|string
      */
-    protected function getQueryUrl(){
-        return (!empty($this->customQueryUrl)?
-            $this->customQueryUrl:
+    protected function getQueryUrl()
+    {
+        return (!empty($this->customQueryUrl) ?
+            $this->customQueryUrl :
             ApiUrlRegistry::instance()->getListUrl($this->entityName));
     }
 
@@ -205,8 +216,9 @@ abstract class AbstractQuery{
      * @param QuerySpecs $querySpecs
      * @return QuerySpecs
      */
-    protected function attachExpand(QuerySpecs &$querySpecs){
-        if ( $this->expand !== null ){
+    protected function attachExpand(QuerySpecs &$querySpecs)
+    {
+        if ($this->expand !== null) {
             $querySpecs->expand = $this->expand;
         }
         return $querySpecs;
@@ -216,20 +228,22 @@ abstract class AbstractQuery{
      * @param $response
      * @return MetaField
      */
-    protected function mapIntermediateResponseAttributes(&$response){
-        foreach ( $response as $key => $responseAttribute ){
-            if ( $key === 'meta' ) {
+    protected function mapIntermediateResponseAttributes(&$response)
+    {
+        foreach ($response as $key => $responseAttribute) {
+            if ($key === 'meta') {
                 $this->responseAttributes['meta'] = new MetaField($responseAttribute);
-            } else if ( $key !== 'rows' ) {
+            } else if ($key !== 'rows') {
                 $this->responseAttributes[$key] = $responseAttribute;
             }
         }
         return $this->responseAttributes['meta'];
     }
 
-    public function mapResponseAttributes(){
+    public function mapResponseAttributes()
+    {
         $result = (object)$this->responseAttributes;
-        if ( $this->responseAttributesMapper ){
+        if ($this->responseAttributesMapper) {
             return call_user_func($this->responseAttributesMapper, $result, $this->getSkladInstance());
         }
         return $result;

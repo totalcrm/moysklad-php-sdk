@@ -1,14 +1,16 @@
 <?php
 
-namespace MoySklad\Entities\Documents;
+namespace TotalCRM\MoySklad\Entities\Documents;
 
-use MoySklad\Entities\Organization;
-use MoySklad\Entities\Store;
+use TotalCRM\MoySklad\Entities\Organization;
+use TotalCRM\MoySklad\Entities\Store;
 
-class Inventory extends AbstractDocument{
+class Inventory extends AbstractDocument
+{
     public static $entityName = 'inventory';
+
     public static function getFieldsRequiredForCreation()
     {
-        return [ Organization::$entityName, Store::$entityName];
+        return [Organization::$entityName, Store::$entityName];
     }
 }
