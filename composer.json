@@ -1,5 +1,5 @@
 {
-    "name": "tooyz/moysklad",
+    "name": "totalcrm/moysklad-php-sdk",
     "description": "Get it here: https://github.com/Tooyz/moysklad",
     "require": {
         "php": ">=7.0",
