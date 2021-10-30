@@ -4,6 +4,7 @@ namespace TotalCRM\MoySklad\Lists;
 
 use TotalCRM\MoySklad\Components\Fields\MetaField;
 use TotalCRM\MoySklad\Components\Query\RelationQuery;
+use TotalCRM\MoySklad\Exceptions\UnknownEntityException;
 use TotalCRM\MoySklad\MoySklad;
 use TotalCRM\MoySklad\Registers\ApiUrlRegistry;
 
@@ -33,7 +34,7 @@ class RelationEntityList extends EntityList
     /**
      * Get RelationListQuery object which van be used for getting, filtering and searching lists defined in meta
      * @return RelationQuery
-     * @throws \MoySklad\Exceptions\UnknownEntityException
+     * @throws UnknownEntityException
      * @see ListQuery
      */
     public function query()

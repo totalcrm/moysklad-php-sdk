@@ -6,7 +6,7 @@ use TotalCRM\MoySklad\Entities\AbstractEntity;
 
 class AbstractTemplate extends AbstractEntity
 {
-    public static $entityName = 'a_template';
+    public static string $entityName = 'a_template';
 
     public function getContent()
     {

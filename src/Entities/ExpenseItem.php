@@ -7,5 +7,5 @@ use TotalCRM\MoySklad\Traits\RequiresOnlyNameForCreation;
 class ExpenseItem extends AbstractEntity
 {
     use RequiresOnlyNameForCreation;
-    public static $entityName = 'expenseitem';
+    public static string $entityName = 'expenseitem';
 }

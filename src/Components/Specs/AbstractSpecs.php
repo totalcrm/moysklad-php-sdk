@@ -2,16 +2,18 @@
 
 namespace TotalCRM\MoySklad\Components\Specs;
 
+use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
+use TotalCRM\MoySklad\Components\Specs\LinkingSpecs;
+use TotalCRM\MoySklad\Components\Specs\CreationSpecs;
 use TotalCRM\MoySklad\Exceptions\UnknownSpecException;
 
 /**
- * Specs are used as parameters
  * Class AbstractSpecs
- * @package MoySklad\Components\Specs
+ * @package TotalCRM\MoySklad\Components\Specs
  */
 abstract class AbstractSpecs
 {
-    protected static $cachedDefaultSpecs = null;
+    protected static $cachedDefaultSpecs;
 
     /**
      * AbstractSpecs constructor.
@@ -37,15 +39,19 @@ abstract class AbstractSpecs
 
     /**
      * Should be used to construct specs. Returns cached copy if used with empty array
-     * @param array $specs
-     * @return static
+     * @param array|null $specs
+     * @return AbstractSpecs|QuerySpecs|LinkingSpecs|CreationSpecs
+     * @throws UnknownSpecException
      */
-    public static function create($specs = [])
+    public static function create(?array $specs = [])
     {
-        $cl = get_called_class();
+        /** @var self $cl */
+        $cl = static::class;
         if (empty($specs) && $cl::$cachedDefaultSpecs !== null) {
+
             return $cl::$cachedDefaultSpecs;
         }
+
         return new static($specs);
     }
 
@@ -53,6 +59,7 @@ abstract class AbstractSpecs
      * Create new specs from two existing, does not modify the original ones
      * @param static $otherSpecs
      * @return static
+     * @throws UnknownSpecException
      */
     public function mergeWith($otherSpecs)
     {
@@ -70,7 +77,7 @@ abstract class AbstractSpecs
      * Converts itself to array
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return (array)$this;
     }
@@ -83,6 +90,24 @@ abstract class AbstractSpecs
     public function __get($name)
     {
         throw new UnknownSpecException($name);
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     */
+    public function __set($name, $value)
+    {
+        $this->$name = $value;
+    }
+
+    /**
+     * @param $name
+     * @return bool
+     */
+    public function __isset($name): bool
+    {
+        return isset($this->$name) ? true : false;
     }
 
     abstract public function getDefaults();

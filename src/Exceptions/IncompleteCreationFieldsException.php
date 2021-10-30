@@ -4,6 +4,7 @@ namespace TotalCRM\MoySklad\Exceptions;
 
 use \Exception;
 use TotalCRM\MoySklad\Entities\AbstractEntity;
+use function json_encode;
 
 /**
  * Not all fields required for creation were passed
@@ -23,7 +24,7 @@ class IncompleteCreationFieldsException extends Exception
             }
         }
         parent::__construct(
-            "Entity " . $c . " requires these fields to be created: " . \json_encode($requiredFields) . ", has no these fields at the moment: " . \json_encode($failedFields),
+            "Entity " . $c . " requires these fields to be created: " . \json_encode($requiredFields, JSON_THROW_ON_ERROR) . ", has no these fields at the moment: " . json_encode($failedFields, JSON_THROW_ON_ERROR),
             $code,
             $previous);
     }

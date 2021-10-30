@@ -6,7 +6,7 @@ use TotalCRM\MoySklad\Entities\Organization;
 
 class Move extends AbstractMovement
 {
-    public static $entityName = 'move';
+    public static string $entityName = 'move';
 
     public static function getFieldsRequiredForCreation()
     {

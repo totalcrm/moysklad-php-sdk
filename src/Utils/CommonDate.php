@@ -8,7 +8,9 @@ class CommonDate
 
     public function __construct($time = null)
     {
-        if (!$time) $time = time();
+        if (!$time) {
+            $time = time();
+        }
         $this->input = $time;
     }
 

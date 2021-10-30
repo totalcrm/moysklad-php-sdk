@@ -2,16 +2,23 @@
 
 namespace TotalCRM\MoySklad\Components\Specs\QuerySpecs\Reports;
 
-
 use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
 
+/**
+ * Class StockReportQuerySpecs
+ * @package TotalCRM\MoySklad\Components\Specs\QuerySpecs\Reports
+ */
 class StockReportQuerySpecs extends QuerySpecs
 {
-    protected static $cachedDefaultSpecs = null;
+    protected static $cachedDefaultSpecs;
 
-    public function getDefaults()
+    /**
+     * @return array
+     */
+    public function getDefaults(): array
     {
         $res = parent::getDefaults();
+
         $res['store.id'] = null;
         $res['product.id'] = null;
         $res['consignment.id'] = null;
@@ -24,6 +31,7 @@ class StockReportQuerySpecs extends QuerySpecs
         $res['characteristics'] = null;
         $res['includeRelated'] = null;
         $res['operation.id'] = null;
+
         return $res;
     }
 }

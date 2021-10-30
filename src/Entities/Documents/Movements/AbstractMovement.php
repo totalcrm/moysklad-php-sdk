@@ -8,7 +8,7 @@ use TotalCRM\MoySklad\Entities\Store;
 
 class AbstractMovement extends AbstractDocument
 {
-    public static $entityName = "a_movement";
+    public static string $entityName = "a_movement";
 
     public static function getFieldsRequiredForCreation()
     {

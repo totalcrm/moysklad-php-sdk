@@ -2,10 +2,17 @@
 
 namespace TotalCRM\MoySklad\Components\Fields;
 
+use TotalCRM\MoySklad\Components\Fields\AbstractFieldAccessor;
+use TotalCRM\MoySklad\Exceptions\InvalidUrlException;
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use TotalCRM\MoySklad\Exceptions\InvalidUrlException;
+use RuntimeException;
 
+/**
+ * Class ImageField
+ * @package TotalCRM\MoySklad\Components\Fields
+ */
 class ImageField extends AbstractFieldAccessor
 {
     /**
@@ -14,7 +21,7 @@ class ImageField extends AbstractFieldAccessor
      * @return ImageField
      * @throws InvalidUrlException
      */
-    public static function createFromUrl($url, $fileName = null)
+    public static function createFromUrl($url, $fileName = null): ImageField
     {
         if (filter_var($url, FILTER_VALIDATE_URL) === false) {
             throw new InvalidUrlException($url);
@@ -27,9 +34,9 @@ class ImageField extends AbstractFieldAccessor
      * @param $path
      * @param null $fileName
      * @return ImageField
-     * @throws \Exception
+     * @throws Exception
      */
-    public static function createFromPath($path, $fileName = null)
+    public static function createFromPath($path, $fileName = null): ImageField
     {
         /*
          * Php will throw if no file exist
@@ -60,11 +67,17 @@ class ImageField extends AbstractFieldAccessor
      * @param string $size
      * @return null|string
      */
-    public function getDownloadLink($size = 'normal')
+    public function getDownloadLink($size = 'normal'): ?string
     {
-        if (isset($this->meta->href) && $size === 'normal') return $this->meta->href;
-        if (isset($this->miniature->href) && $size === 'miniature') return $this->miniature->href;
-        if (isset($this->tiny->href) && $size === 'tiny') return $this->tiny->href;
+        if (isset($this->meta->href) && $size === 'normal') {
+            return $this->meta->href;
+        }
+        if (isset($this->miniature->href) && $size === 'miniature') {
+            return $this->miniature->href;
+        }
+        if (isset($this->tiny->href) && $size === 'tiny') {
+            return $this->tiny->href;
+        }
         return null;
     }
 
@@ -72,12 +85,12 @@ class ImageField extends AbstractFieldAccessor
      * @param $saveFile
      * @param string $size
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
-    public function download($saveFile, $size = 'normal')
+    public function download($saveFile, $size = 'normal'): string
     {
         if ($link = $this->getDownloadLink($size)) {
-            $filePath = fopen($saveFile, 'w+');
+            $filePath = fopen($saveFile, 'wb+');
             $client = new Client();
 
             $response = $this->e->getSkladInstance()->getClient()->getRaw(
@@ -86,6 +99,6 @@ class ImageField extends AbstractFieldAccessor
 
             return $response->getStatusCode();
         }
-        throw new \Exception("Image does not have a $size size link. Try to refresh hosting entity");
+        throw new RuntimeException("Image does not have a $size size link. Try to refresh hosting entity");
     }
 }

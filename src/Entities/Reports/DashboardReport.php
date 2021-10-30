@@ -6,7 +6,7 @@ use TotalCRM\MoySklad\MoySklad;
 
 class DashboardReport extends AbstractReport
 {
-    public static $reportName = 'dashboard';
+    public static string $reportName = 'dashboard';
 
     public static function day(MoySklad $sklad)
     {

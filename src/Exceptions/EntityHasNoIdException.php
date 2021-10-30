@@ -12,6 +12,12 @@ use TotalCRM\MoySklad\Entities\AbstractEntity;
  */
 class EntityHasNoIdException extends Exception
 {
+    /**
+     * EntityHasNoIdException constructor.
+     * @param AbstractEntity $entity
+     * @param int|null $code
+     * @param Exception|null $previous
+     */
     public function __construct(AbstractEntity $entity, $code = 0, Exception $previous = null)
     {
         parent::__construct(

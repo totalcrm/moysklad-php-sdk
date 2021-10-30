@@ -6,7 +6,7 @@ use TotalCRM\MoySklad\Entities\Organization;
 
 class CashOut extends AbstractCash
 {
-    public static $entityName = 'cashout';
+    public static string $entityName = 'cashout';
 
     public static function getFieldsRequiredForCreation()
     {

@@ -7,5 +7,5 @@ use TotalCRM\MoySklad\Entities\Organization;
 
 class PriceListRow extends AbstractDocument
 {
-    public static $entityName = 'pricelistrow';
+    public static string $entityName = 'pricelistrow';
 }

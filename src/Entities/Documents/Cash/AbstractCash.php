@@ -6,5 +6,5 @@ use TotalCRM\MoySklad\Entities\Documents\AbstractDocument;
 
 class AbstractCash extends AbstractDocument
 {
-    public static $entityName = 'a_cash';
+    public static string $entityName = 'a_cash';
 }

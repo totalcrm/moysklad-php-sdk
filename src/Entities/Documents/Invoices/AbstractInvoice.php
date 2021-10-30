@@ -7,7 +7,7 @@ use TotalCRM\MoySklad\Entities\Organization;
 
 class AbstractInvoice extends AbstractDocument
 {
-    public static $entityName = 'a_invoice';
+    public static string $entityName = 'a_invoice';
 
     public static function getFieldsRequiredForCreation()
     {

@@ -3,24 +3,22 @@
 namespace TotalCRM\MoySklad\Components\Fields;
 
 use TotalCRM\MoySklad\Entities\AbstractEntity;
+use JsonSerializable;
+use stdClass;
 
 /**
- * Class for storing different fields
  * Class AbstractFieldAccessor
- * @package MoySklad\Components\Fields
+ * @package TotalCRM\MoySklad\Components\Fields
  */
-abstract class AbstractFieldAccessor implements \JsonSerializable
+abstract class AbstractFieldAccessor implements JsonSerializable
 {
-    protected $storage;
-    /**
-     * @var AbstractEntity
-     */
-    protected $e;
+    protected stdClass $storage;
+    protected ?AbstractEntity $e;
 
     public function __construct($fields, AbstractEntity &$entity = null)
     {
         $this->e = $entity;
-        $this->storage = new \stdClass();
+        $this->storage = new stdClass();
         $this->replace($fields);
     }
 
@@ -28,24 +26,27 @@ abstract class AbstractFieldAccessor implements \JsonSerializable
      * Replace fields with new
      * @param $fields
      */
-    public function replace($fields)
+    public function replace($fields): void
     {
-        $this->storage = new \stdClass();
-        if ($fields instanceof static) $fields = $fields->getInternal();
+        $this->storage = new stdClass();
+
+        if ($fields instanceof static) {
+            $fields = $fields->getInternal();
+        }
         foreach ($fields as $fieldName => $field) {
             $this->storage->{$fieldName} = $field;
         }
     }
 
     /**
-     * @return \stdClass
+     * @return stdClass
      */
-    public function getInternal()
+    public function getInternal(): stdClass
     {
         return $this->storage;
     }
 
-    public function deleteKey($key)
+    public function deleteKey($key): void
     {
         unset($this->storage->{$key});
     }

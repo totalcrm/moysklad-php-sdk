@@ -4,5 +4,5 @@ namespace TotalCRM\MoySklad\Entities;
 
 class Discount extends AbstractEntity
 {
-    public static $entityName = 'discount';
+    public static string $entityName = 'discount';
 }

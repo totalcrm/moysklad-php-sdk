@@ -6,8 +6,7 @@ use TotalCRM\MoySklad\Entities\Assortment;
 
 class Consignment extends AbstractProduct
 {
-    public static
-        $entityName = 'consignment';
+    public static string $entityName = 'consignment';
 
     public static function getFieldsRequiredForCreation()
     {

@@ -6,5 +6,5 @@ use TotalCRM\MoySklad\Entities\Products\AbstractProduct;
 
 class AbstractComponent extends AbstractProduct
 {
-    public static $entityName = 'a_component';
+    public static string $entityName = 'a_component';
 }

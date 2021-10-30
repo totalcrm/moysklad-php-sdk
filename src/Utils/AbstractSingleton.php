@@ -13,12 +13,13 @@ abstract class AbstractSingleton
     /**
      * @return static|null
      */
-    final public static function instance()
+    final public static function instance(): ?AbstractSingleton
     {
         if (is_null(static::$instance)) {
-            $class = get_called_class();
+            $class = static::class;
             static::$instance = new $class();
         }
+
         return static::$instance;
     }
 }

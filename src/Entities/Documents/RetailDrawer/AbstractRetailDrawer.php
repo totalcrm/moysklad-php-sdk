@@ -6,5 +6,5 @@ use TotalCRM\MoySklad\Entities\Documents\AbstractDocument;
 
 class AbstractRetailDrawer extends AbstractDocument
 {
-    public static $entityName = 'a_retaildrawer';
+    public static string $entityName = 'a_retaildrawer';
 }

@@ -6,7 +6,7 @@ use TotalCRM\MoySklad\Entities\Misc\Characteristics;
 
 class Variant extends AbstractProduct
 {
-    public static $entityName = 'variant';
+    public static string $entityName = 'variant';
 
     public static function getFieldsRequiredForCreation()
     {

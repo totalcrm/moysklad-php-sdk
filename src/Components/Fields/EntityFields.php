@@ -2,9 +2,13 @@
 
 namespace TotalCRM\MoySklad\Components\Fields;
 
+use TotalCRM\MoySklad\Components\Fields\MetaField;
+use TotalCRM\MoySklad\Components\Fields\AttributeCollection;
+use TotalCRM\MoySklad\Components\Fields\ImageField;
+
 /**
  * Class EntityFields
- * @package MoySklad\Components\Fields
+ * @package TotalCRM\MoySklad\Components\Fields
  */
 class EntityFields extends AbstractFieldAccessor
 {
@@ -13,9 +17,12 @@ class EntityFields extends AbstractFieldAccessor
      * Replace fields. Creates MetaField and AttributeCollection within itself
      * @param $fields
      */
-    public function replace($fields)
+    public function replace($fields): void
     {
-        if ($fields instanceof EntityFields) $fields = $fields->getInternal();
+        if ($fields instanceof self) {
+            $fields = $fields->getInternal();
+        }
+
         foreach ($fields as $fieldName => $field) {
             switch ($fieldName) {
                 case "meta":
@@ -39,6 +46,6 @@ class EntityFields extends AbstractFieldAccessor
      */
     public function getMeta()
     {
-        return $this->storage->meta ? $this->storage->meta : null;
+        return $this->storage->meta ?: null;
     }
 }

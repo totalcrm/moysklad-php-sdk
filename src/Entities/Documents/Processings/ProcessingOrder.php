@@ -7,7 +7,7 @@ use TotalCRM\MoySklad\Entities\Organization;
 
 class ProcessingOrder extends AbstractDocument
 {
-    public static $entityName = 'processingorder';
+    public static string $entityName = 'processingorder';
 
     public static function getFieldsRequiredForCreation()
     {

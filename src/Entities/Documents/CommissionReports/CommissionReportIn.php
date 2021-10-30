@@ -4,5 +4,5 @@ namespace TotalCRM\MoySklad\Entities\Documents\CommissionReports;
 
 class CommissionReportIn extends AbstractCommissionReport
 {
-    public static $entityName = 'commissionreportin';
+    public static string $entityName = 'commissionreportin';
 }

@@ -4,5 +4,5 @@ namespace TotalCRM\MoySklad\Entities\Documents\Positions;
 
 class CustomerOrderPosition extends AbstractPosition
 {
-    public static $entityName = 'customerorderposition';
+    public static string $entityName = 'customerorderposition';
 }

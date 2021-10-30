@@ -8,7 +8,7 @@ use TotalCRM\MoySklad\MoySklad;
 
 class ProfitReport extends AbstractReport
 {
-    public static $reportName = 'profit';
+    public static string $reportName = 'profit';
 
     public static function byProduct(MoySklad $sklad, ProfitReportQuerySpecs $specs = null)
     {

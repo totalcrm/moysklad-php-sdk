@@ -1,8 +1,8 @@
 <?php
 
-namespace TotalCRM\oySklad\Entities;
+namespace TotalCRM\MoySklad\Entities;
 
 class Organization extends AbstractEntity
 {
-    public static $entityName = 'organization';
+    public static string $entityName = 'organization';
 }

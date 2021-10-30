@@ -7,7 +7,7 @@ use TotalCRM\MoySklad\Entities\Store;
 
 class Enter extends AbstractMovement
 {
-    public static $entityName = 'enter';
+    public static string $entityName = 'enter';
 
     public static function getFieldsRequiredForCreation()
     {

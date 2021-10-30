@@ -6,5 +6,5 @@ use TotalCRM\MoySklad\Entities\Documents\Cash\AbstractCash;
 
 class PaymentOut extends AbstractCash
 {
-    public static $entityName = 'paymentout';
+    public static string $entityName = 'paymentout';
 }

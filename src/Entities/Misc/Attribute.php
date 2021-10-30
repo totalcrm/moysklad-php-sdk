@@ -6,5 +6,5 @@ use TotalCRM\MoySklad\Entities\AbstractEntity;
 
 class Attribute extends AbstractEntity
 {
-    public static $entityName = 'attributemetadata';
+    public static string $entityName = 'attributemetadata';
 }

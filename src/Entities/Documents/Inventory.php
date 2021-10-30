@@ -7,7 +7,7 @@ use TotalCRM\MoySklad\Entities\Store;
 
 class Inventory extends AbstractDocument
 {
-    public static $entityName = 'inventory';
+    public static string $entityName = 'inventory';
 
     public static function getFieldsRequiredForCreation()
     {

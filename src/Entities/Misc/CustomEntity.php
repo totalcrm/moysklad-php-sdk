@@ -8,5 +8,5 @@ use TotalCRM\MoySklad\Traits\RequiresOnlyNameForCreation;
 class CustomEntity extends AbstractEntity
 {
     use RequiresOnlyNameForCreation;
-    public static $entityName = 'customentity';
+    public static string $entityName = 'customentity';
 }

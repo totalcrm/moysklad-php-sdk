@@ -2,16 +2,15 @@
 
 namespace TotalCRM\MoySklad\Components\Specs;
 
+use TotalCRM\MoySklad\Components\Specs\AbstractSpecs;
 
 class EmptySpecs extends AbstractSpecs
 {
-    protected static $cachedDefaultSpecs = null;
-
     /**
      * Get possible variables for spec
      * @return array
      */
-    public function getDefaults()
+    public function getDefaults(): array
     {
         return [];
     }

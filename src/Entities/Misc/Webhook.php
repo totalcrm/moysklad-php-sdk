@@ -3,16 +3,19 @@
 namespace TotalCRM\MoySklad\Entities\Misc;
 
 use TotalCRM\MoySklad\Entities\AbstractEntity;
+use TotalCRM\MoySklad\Exceptions\EntityCantBeMutatedException;
+use TotalCRM\MoySklad\Exceptions\EntityHasNoIdException;
+use Throwable;
 
 class Webhook extends AbstractEntity
 {
 
-    const
+    public const
         ACTION_CREATE = 'CREATE',
         ACTION_UPDATE = 'UPDATE',
         ACTION_DELETE = 'DELETE';
 
-    public static $entityName = 'webhook';
+    public static string $entityName = 'webhook';
 
     /**
      * @return array
@@ -24,8 +27,11 @@ class Webhook extends AbstractEntity
 
     /**
      * @return AbstractEntity
+     * @throws Throwable
+     * @throws EntityCantBeMutatedException
+     * @throws EntityHasNoIdException
      */
-    public function disable()
+    public function disable(): AbstractEntity
     {
         $this->fields->enabled = false;
         return $this->update();
@@ -33,8 +39,11 @@ class Webhook extends AbstractEntity
 
     /**
      * @return AbstractEntity
+     * @throws Throwable
+     * @throws EntityCantBeMutatedException
+     * @throws EntityHasNoIdException
      */
-    public function enable()
+    public function enable(): AbstractEntity
     {
         $this->fields->enabled = true;
         return $this->update();

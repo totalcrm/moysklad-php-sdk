@@ -6,16 +6,13 @@ use TotalCRM\MoySklad\MoySklad;
 
 trait AccessesSkladInstance
 {
-    /**
-     * @var string
-     */
-    protected $skladHashCode;
+    protected string $skladHashCode;
 
     /**
      * Get MoySklad instance used for constructing entity
      * @return MoySklad
      */
-    public function getSkladInstance()
+    public function getSkladInstance(): MoySklad
     {
         return MoySklad::findInstanceByHash($this->skladHashCode);
     }

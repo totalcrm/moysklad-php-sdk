@@ -4,5 +4,5 @@ namespace TotalCRM\MoySklad\Entities;
 
 class Bonusprogram extends AbstractEntity
 {
-    public static $entityName = 'bonusprogram';
+    public static string $entityName = 'bonusprogram';
 }
