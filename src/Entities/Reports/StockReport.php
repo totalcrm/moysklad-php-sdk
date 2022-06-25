@@ -15,6 +15,7 @@ class StockReport extends AbstractReport
     /**
      * @param MoySklad $sklad
      * @param StockReportQuerySpecs|null $specs
+<<<<<<< HEAD
      * @param FilterQuery|null $filter
      * @return \stdClass|string
      * @throws UnknownSpecException
@@ -31,6 +32,12 @@ class StockReport extends AbstractReport
      * @throws UnknownSpecException
      */
     public static function byStore(MoySklad $sklad, ?StockReportQuerySpecs $specs = null, ?FilterQuery $filter = null)
+=======
+     * @return \stdClass|string
+     * @throws UnknownSpecException
+     */
+    public static function all(MoySklad $sklad, StockReportQuerySpecs $specs = null)
+>>>>>>> 4db1a0840be5891584390f55fcaf7eeb9631a8e2
     {
         return static::queryWithParam($sklad, 'bystore', $specs, $filter);
     }
@@ -41,7 +48,11 @@ class StockReport extends AbstractReport
      * @return \stdClass|string
      * @throws UnknownSpecException
      */
+<<<<<<< HEAD
     public static function current(MoySklad $sklad, ?StockReportQuerySpecs $specs = null, ?FilterQuery $filter = null)
+=======
+    public static function byStore(MoySklad $sklad, StockReportQuerySpecs $specs = null)
+>>>>>>> 4db1a0840be5891584390f55fcaf7eeb9631a8e2
     {
         return static::queryWithParam($sklad, 'all/current', $specs, $filter);
     }
