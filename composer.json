@@ -9,7 +9,6 @@
         "ext-zip": "*",
         "ext-mbstring": "*",
         "ext-xsl": "*"
-        "ext-json": "*"
     },
     "authors": [
         {
