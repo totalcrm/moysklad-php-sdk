@@ -4,15 +4,12 @@
     "require": {
         "php": ">=7.4",
         "guzzlehttp/guzzle": "^6.2.1",
-<<<<<<< HEAD
         "ext-json": "*",
         "ext-dom": "*",
         "ext-zip": "*",
         "ext-mbstring": "*",
         "ext-xsl": "*"
-=======
         "ext-json": "*"
->>>>>>> 4db1a0840be5891584390f55fcaf7eeb9631a8e2
     },
     "authors": [
         {
