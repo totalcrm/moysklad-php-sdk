@@ -2,6 +2,8 @@
 
 namespace TotalCRM\MoySklad\Lists;
 
+use Iterator;
+use Throwable;
 use TotalCRM\MoySklad\Components\Fields\MetaField;
 use TotalCRM\MoySklad\Components\MassRequest;
 use TotalCRM\MoySklad\Entities\AbstractEntity;
@@ -37,7 +39,7 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      */
     public function replaceItems($items)
     {
-        if ($items instanceof EntityList) {
+        if ($items instanceof self) {
             $this->items = $items->toArray();
         } else if (!is_array($items)) {
             $this->items = [$items];
@@ -134,7 +136,7 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      */
     public function transformItemsToClass($targetClass)
     {
-        $this->items = array_map(function (AbstractEntity $e) use ($targetClass) {
+        $this->items = array_map(static function (AbstractEntity $e) use ($targetClass) {
             return $e->transformToClass($targetClass);
         }, $this->items);
         return $this;
@@ -146,7 +148,7 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      */
     public function transformItemsToMetaClass()
     {
-        $this->items = array_map(function (AbstractEntity $e) {
+        $this->items = array_map(static function (AbstractEntity $e) {
             return $e->transformToMetaClass();
         }, $this->items);
         return $this;
@@ -155,8 +157,9 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
     /**
      * Runs batch creation with stored items
      * @return $this
+     * @throws Throwable
      */
-    public function massCreate()
+    public function massCreate(): self
     {
         $mr = new MassRequest($this->getSkladInstance(), $this->items);
         $this->items = $mr->create()->toArray();
@@ -165,7 +168,7 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
 
     /**
      * Get iterator with stored items
-     * @return \Iterator
+     * @return Iterator
      */
     public function getIterator()
     {
@@ -267,9 +270,9 @@ class EntityList implements \JsonSerializable, \ArrayAccess, \IteratorAggregate,
      * @param $options
      * @return string
      */
-    public function toJson($options)
+    public function toJson($options): string
     {
-        return json_encode($this->jsonSerialize(), $options);
+        return json_encode($this->jsonSerialize(), JSON_THROW_ON_ERROR | $options);
     }
 
     public function jsonSerialize()

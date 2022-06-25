@@ -2,15 +2,16 @@
 
 namespace TotalCRM\MoySklad\Components;
 
+use Exception;
+use RuntimeException;
+
 /**
- * Used for returning results with expanded relations
  * Class Expand
- * @package MoySklad\Components
+ * @package TotalCRM\MoySklad\Components
  */
 class Expand
 {
-    private
-        $params = [];
+    private ?array $params;
 
     private function __construct($params)
     {
@@ -21,11 +22,13 @@ class Expand
      * Create an instance of expand
      * @param $params
      * @return static
-     * @throws \Exception
+     * @throws Exception
      */
     public static function create($params)
     {
-        if (!is_array($params)) throw new \Exception('Expand params must be an array');
+        if (!is_array($params)) {
+            throw new RuntimeException('Expand params must be an array');
+        }
         return new static($params);
     }
 
@@ -33,7 +36,7 @@ class Expand
      * Convert itself to string
      * @return string
      */
-    public function flatten()
+    public function flatten(): string
     {
         return implode(',', $this->params);
     }

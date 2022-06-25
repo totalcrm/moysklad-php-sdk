@@ -2,20 +2,21 @@
 
 namespace TotalCRM\MoySklad\Components\Fields;
 
+use TotalCRM\MoySklad\Components\Fields\AbstractFieldAccessor;
+use TotalCRM\MoySklad\Entities\AbstractEntity;
 use TotalCRM\MoySklad\Exceptions\UnknownEntityException;
 use TotalCRM\MoySklad\Registers\EntityRegistry;
 
 /**
- * "meta" field of entity
  * Class MetaField
- * @package MoySklad\Components\Fields
+ * @package TotalCRM\MoySklad\Components\Fields
  */
 class MetaField extends AbstractFieldAccessor
 {
 
-    private static $ep = null;
+    private static $ep;
 
-    public function __construct($fields)
+    public function __construct($fields, AbstractEntity &$entity = null)
     {
         if ($fields instanceof static) {
             parent::__construct($fields->getInternal());
@@ -29,22 +30,26 @@ class MetaField extends AbstractFieldAccessor
 
     /**
      * Try to get class from type field
-     * @return null
+     * @return string|null
      * @throws UnknownEntityException
      */
-    public function getClass()
+    public function getClass(): ?string
     {
-        if (empty($this->type)) return null;
+        if (empty($this->type)) {
+            return null;
+        }
+
         if (!isset(static::$ep->entityNames[$this->type])) {
             throw new UnknownEntityException($this->type);
         }
+
         return static::$ep->entityNames[$this->type];
     }
 
     /**
      * @return string
      */
-    public function getHref()
+    public function getHref(): string
     {
         return $this->href;
     }
@@ -53,7 +58,7 @@ class MetaField extends AbstractFieldAccessor
      * Get relation link in meta
      * @return array
      */
-    public function parseRelationHref()
+    public function parseRelationHref(): array
     {
         $eHref = explode('/', $this->href);
         $cntHref = count($eHref);
@@ -72,19 +77,20 @@ class MetaField extends AbstractFieldAccessor
         if (!empty($this->href)) {
             $exp = explode("/", $this->href);
             $idExp = explode("?", $exp[count($exp) - 1]);
-            $id = $idExp[0];
-            return $id;
+
+            return $idExp[0] ?? null;
         }
+
         return null;
     }
 
     /**
      * Returns class from stdClass/array meta object
      * @param $metaField
-     * @return string
+     * @return string|null
      * @throws UnknownEntityException
      */
-    public static function getClassFromPlainMeta($metaField)
+    public static function getClassFromPlainMeta($metaField): ?string
     {
         return (new static($metaField))->getClass();
     }

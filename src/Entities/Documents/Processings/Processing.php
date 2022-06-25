@@ -4,5 +4,5 @@ namespace TotalCRM\MoySklad\Entities\Documents\Processings;
 
 class Processing extends AbstractProcessing
 {
-    public static $entityName = 'processing';
+    public static string $entityName = 'processing';
 }

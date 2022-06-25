@@ -7,5 +7,5 @@ use TotalCRM\MoySklad\Traits\RequiresOnlyNameForCreation;
 class Service extends AbstractProduct
 {
     use RequiresOnlyNameForCreation;
-    public static $entityName = 'service';
+    public static string $entityName = 'service';
 }

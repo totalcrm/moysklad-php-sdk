@@ -5,6 +5,6 @@ namespace TotalCRM\MoySklad\Entities;
 class Assortment extends AbstractEntity
 {
 
-    public static $entityName = 'assortment';
+    public static string $entityName = 'assortment';
 
 }

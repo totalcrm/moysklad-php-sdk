@@ -8,20 +8,9 @@ use TotalCRM\MoySklad\Registers\EntityRegistry;
 class MoySklad
 {
 
-    /**
-     * @var MoySkladHttpClient
-     */
-    private $client;
-
-    /**
-     * @var string
-     */
-    private $hashCode;
-
-    /**
-     * @var MoySklad[]
-     */
-    private static $instances = [];
+    private MoySkladHttpClient $client;
+    private string $hashCode;
+    private static array $instances = [];
 
     private function __construct($login, $password, $posToken, $hashCode, $subdomain = "online")
     {
@@ -35,7 +24,7 @@ class MoySklad
      * @param $password
      * @return string
      */
-    private static function makeHash($login, $password)
+    private static function makeHash($login, $password): string
     {
         return crc32($login . $password);
     }
@@ -48,7 +37,7 @@ class MoySklad
      * @param $posToken
      * @return MoySklad
      */
-    public static function getInstance($login, $password, $subdomain = "online", $posToken = null)
+    public static function getInstance($login, $password, $subdomain = "online", $posToken = null): MoySklad
     {
         $hash = static::makeHash($login, $password);
         if (empty(static::$instances[$hash])) {
@@ -63,7 +52,7 @@ class MoySklad
      * @param $hashCode
      * @return MoySklad
      */
-    public static function findInstanceByHash($hashCode)
+    public static function findInstanceByHash($hashCode): MoySklad
     {
         return static::$instances[$hashCode];
     }
@@ -72,7 +61,7 @@ class MoySklad
      * We're java now
      * @return string
      */
-    public function hashCode()
+    public function hashCode(): string
     {
         return $this->hashCode;
     }
@@ -80,15 +69,16 @@ class MoySklad
     /**
      * @return MoySkladHttpClient
      */
-    public function getClient()
+    public function getClient(): MoySkladHttpClient
     {
         return $this->client;
     }
 
     /**
+     * @param $posToken
      * @deprecated
      */
-    public function setPosToken($posToken)
+    public function setPosToken($posToken): void
     {
         $this->client->setPosToken($posToken);
     }

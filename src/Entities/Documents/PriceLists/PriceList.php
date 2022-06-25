@@ -7,7 +7,7 @@ use TotalCRM\MoySklad\Entities\Organization;
 
 class PriceList extends AbstractDocument
 {
-    public static $entityName = 'pricelist';
+    public static string $entityName = 'pricelist';
 
     public static function getFieldsRequiredForCreation()
     {

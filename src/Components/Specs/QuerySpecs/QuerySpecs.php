@@ -4,11 +4,14 @@ namespace TotalCRM\MoySklad\Components\Specs\QuerySpecs;
 
 use TotalCRM\MoySklad\Components\Specs\AbstractSpecs;
 use TotalCRM\MoySklad\Utils\CommonDate;
+use RuntimeException;
+use Throwable;
+use Exception;
 
 class QuerySpecs extends AbstractSpecs
 {
-    protected static $cachedDefaultSpecs = null;
-    const MAX_LIST_LIMIT = 100;
+    protected static $cachedDefaultSpecs;
+    public const MAX_LIST_LIMIT = 100;
 
     /**
      * Get possible variables for spec, will be sent as query string
@@ -21,7 +24,7 @@ class QuerySpecs extends AbstractSpecs
      *  updatedBy: entity should be updated by employee
      * @return array
      */
-    public function getDefaults()
+    public function getDefaults(): array
     {
         return [
             "limit" => static::MAX_LIST_LIMIT,
@@ -38,12 +41,14 @@ class QuerySpecs extends AbstractSpecs
     /**
      * Fixes wrong limit spec. Fixes maxLimit lower then limit
      * @param array $specs
-     * @return static
-     * @throws \Exception
+     * @return QuerySpecs
+     * @throws Exception
      */
-    public static function create($specs = [])
+    public static function create($specs = []): QuerySpecs
     {
-        if (isset($specs['limit']) && $specs['limit'] > self::MAX_LIST_LIMIT) $specs['limit'] = self::MAX_LIST_LIMIT;
+        if (isset($specs['limit']) && $specs['limit'] > self::MAX_LIST_LIMIT) {
+            $specs['limit'] = self::MAX_LIST_LIMIT;
+        }
         $res = parent::create($specs);
         if ($res->maxResults !== 0 && $res->maxResults < $res->limit) {
             $res->limit = $res->maxResults;
@@ -51,12 +56,14 @@ class QuerySpecs extends AbstractSpecs
         try {
             foreach (['updatedFrom', 'updatedTo'] as $date) {
                 if ($res->{$date} !== null) {
-                    if (is_string($res->{$date})) $res->{$date} = new CommonDate($res->{$date});
+                    if (is_string($res->{$date})) {
+                        $res->{$date} = new CommonDate($res->{$date});
+                    }
                     $res->{$date} = $res->{$date}->format();
                 }
             }
-        } catch (\Throwable $e) {
-            throw new \Exception('"updatedFrom" and "updatedTo" specs should be instances of "' . CommonDate::class . '" class');
+        } catch (Throwable $e) {
+            throw new RuntimeException('"updatedFrom" and "updatedTo" specs should be instances of "' . CommonDate::class . '" class');
         }
 
         return $res;
@@ -66,18 +73,23 @@ class QuerySpecs extends AbstractSpecs
      * Converts itself to array, converts expand spec to string
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $res = parent::toArray();
+
         if (!empty($this->expand)) {
             $res['expand'] = $this->expand->flatten();
         }
+
         foreach ($res as $k => $v) {
-            if ($v === null) unset($res->{$k});
+            if ($v === null) {
+                unset($res->{$k});
+            }
             if ($v instanceof CommonDate) {
                 $res->{$k} = $v->format();
             }
         }
+
         return $res;
     }
 }

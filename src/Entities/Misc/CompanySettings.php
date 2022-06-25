@@ -6,5 +6,5 @@ use TotalCRM\MoySklad\Entities\AbstractEntity;
 
 class CompanySettings extends AbstractEntity
 {
-    public static $entityName = 'companysettings';
+    public static string $entityName = 'companysettings';
 }

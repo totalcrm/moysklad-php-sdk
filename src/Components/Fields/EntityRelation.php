@@ -3,17 +3,29 @@
 namespace TotalCRM\MoySklad\Components\Fields;
 
 use TotalCRM\MoySklad\Components\Expand;
+use TotalCRM\MoySklad\Components\Query\RelationQuery;
 use TotalCRM\MoySklad\Entities\AbstractEntity;
 use TotalCRM\MoySklad\Exceptions\Relations\RelationDoesNotExistException;
 use TotalCRM\MoySklad\Exceptions\Relations\RelationIsList;
 use TotalCRM\MoySklad\Exceptions\Relations\RelationIsSingle;
+use TotalCRM\MoySklad\Exceptions\UnknownEntityException;
 use TotalCRM\MoySklad\Lists\RelationEntityList;
 use TotalCRM\MoySklad\MoySklad;
 
+/**
+ * Class EntityRelation
+ * @package TotalCRM\MoySklad\Components\Fields
+ */
 class EntityRelation extends AbstractFieldAccessor
 {
-    private $relatedByClass = null;
+    private $relatedByClass;
 
+    /**
+     * EntityRelation constructor.
+     * @param $fields
+     * @param $relatedByClass
+     * @param AbstractEntity|null $entity
+     */
     public function __construct($fields, $relatedByClass, AbstractEntity &$entity = null)
     {
         parent::__construct($fields, $entity);
@@ -25,15 +37,16 @@ class EntityRelation extends AbstractFieldAccessor
      * @param AbstractEntity $entity
      * @return static
      */
-    public static function createRelations(MoySklad $sklad, AbstractEntity &$entity)
+    public static function createRelations(MoySklad $sklad, AbstractEntity $entity)
     {
         $internalFields = $entity->fields->getInternal();
         $foundRelations = [];
         foreach ($internalFields as $k => $v) {
             if (is_array($v) || is_object($v)) {
-                $ar = (array)$v;
-                array_walk($ar, function ($e, $i) use ($k, $ar, &$foundRelations, $sklad) {
+                $ar = $v;
+                array_walk($ar, static function ($e, $i) use ($k, $ar, &$foundRelations, $sklad) {
                     if ($i === 'meta') {
+                        /** @var MetaField $mf */
                         $mf = new MetaField($e);
                         if (isset($mf->size)) {
                             $foundRelations[$k] = new RelationEntityList($sklad, [], $mf);
@@ -58,14 +71,16 @@ class EntityRelation extends AbstractFieldAccessor
      * @throws RelationDoesNotExistException
      * @throws RelationIsList
      */
-    public function fresh($relationName, Expand $expand = null)
+    public function fresh($relationName, Expand $expand = null): AbstractEntity
     {
         $this->checkRelationExists($relationName);
         /**
          * @var AbstractEntity $rel
          */
         $rel = $this->storage->{$relationName};
-        if ($rel instanceof RelationEntityList) throw new RelationIsList($relationName, $this->relatedByClass);
+        if ($rel instanceof RelationEntityList) {
+            throw new RelationIsList($relationName, $this->relatedByClass);
+        }
         $c = get_class($rel);
         $queriedEntity = $c::query($rel->getSkladInstance())->byId($rel->fields->meta->getId(), $expand);
         return $rel->replaceFields($queriedEntity);
@@ -73,19 +88,21 @@ class EntityRelation extends AbstractFieldAccessor
 
     /**
      * @param $relationName
-     * @return \MoySklad\Components\Query\RelationQuery
+     * @return RelationQuery
      * @throws RelationDoesNotExistException
      * @throws RelationIsSingle
-     * @throws \MoySklad\Exceptions\UnknownEntityException
+     * @throws UnknownEntityException
      */
-    public function listQuery($relationName)
+    public function listQuery($relationName): RelationQuery
     {
         $this->checkRelationExists($relationName);
         /**
          * @var RelationEntityList $rel
          */
         $rel = $this->storage->{$relationName};
-        if ($rel instanceof AbstractEntity) throw new RelationIsSingle($relationName, $this->relatedByClass);
+        if ($rel instanceof AbstractEntity) {
+            throw new RelationIsSingle($relationName, $this->relatedByClass);
+        }
         return $rel->query();
     }
 
@@ -93,10 +110,12 @@ class EntityRelation extends AbstractFieldAccessor
      * @param $entityClass
      * @return static|null
      */
-    public function find($entityClass)
+    public function find($entityClass): ?EntityRelation
     {
         foreach ($this->storage as $key => $value) {
-            if (get_class($value) === $entityClass) return $value;
+            if (get_class($value) === $entityClass) {
+                return $value;
+            }
         }
         return null;
     }
@@ -104,7 +123,7 @@ class EntityRelation extends AbstractFieldAccessor
     /**
      * @return array
      */
-    public function getNames()
+    public function getNames(): array
     {
         return array_keys((array)$this->storage);
     }
@@ -113,7 +132,7 @@ class EntityRelation extends AbstractFieldAccessor
      * @param $relationName
      * @throws RelationDoesNotExistException
      */
-    private function checkRelationExists($relationName)
+    private function checkRelationExists($relationName): void
     {
         if (empty($this->storage->{$relationName})) {
             throw new RelationDoesNotExistException($relationName, $this->relatedByClass);

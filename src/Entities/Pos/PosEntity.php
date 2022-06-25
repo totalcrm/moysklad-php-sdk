@@ -9,7 +9,7 @@ use TotalCRM\MoySklad\MoySklad;
 
 abstract class PosEntity extends AbstractEntity
 {
-    public static $entityName = "_a_pos";
+    public static string $entityName = "_a_pos";
     protected static $usePosTokenAuth = false;
 
     public static function query(MoySklad &$skladInstance, QuerySpecs $querySpecs = null)

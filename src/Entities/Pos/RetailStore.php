@@ -8,7 +8,7 @@ use TotalCRM\MoySklad\Registers\ApiUrlRegistry;
 
 class RetailStore extends PosEntity implements DoesNotSupportMutationInterface
 {
-    public static $entityName = 'retailstore';
+    public static string $entityName = 'retailstore';
 
     public static function boot()
     {

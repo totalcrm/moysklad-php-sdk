@@ -7,12 +7,15 @@ use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
 
 class CounterpartyReportQuerySpecs extends QuerySpecs
 {
-    protected static $cachedDefaultSpecs = null;
-
-    public function getDefaults()
+    /**
+     * @return array
+     */
+    public function getDefaults(): array
     {
         $res = parent::getDefaults();
+
         $res['id'] = null;
+
         return $res;
     }
 

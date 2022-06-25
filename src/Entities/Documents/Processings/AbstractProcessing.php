@@ -6,5 +6,5 @@ use TotalCRM\MoySklad\Entities\Documents\AbstractDocument;
 
 class AbstractProcessing extends AbstractDocument
 {
-    public static $entityName = 'a_processing';
+    public static string $entityName = 'a_processing';
 }

@@ -4,5 +4,5 @@ namespace TotalCRM\MoySklad\Entities\Documents\Orders;
 
 class PurchaseOrder extends AbstractOrder
 {
-    public static $entityName = 'purchaseorder';
+    public static string $entityName = 'purchaseorder';
 }

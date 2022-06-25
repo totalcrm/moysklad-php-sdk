@@ -6,23 +6,30 @@ use TotalCRM\MoySklad\Components\Expand;
 use TotalCRM\MoySklad\Entities\AbstractEntity;
 use TotalCRM\MoySklad\Lists\EntityList;
 use TotalCRM\MoySklad\Registers\ApiUrlRegistry;
+use Throwable;
 
 class EntityQuery extends AbstractQuery
 {
-    protected static $entityListClass = EntityList::class;
+    protected static string $entityListClass = EntityList::class;
 
     /**
      * Get entity by id
      * @param $id
      * @param Expand|null $expand Deprecated, use withExpand()
      * @return AbstractEntity
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function byId($id, Expand $expand = null)
+    public function byId($id, Expand $expand = null): AbstractEntity
     {
-        if (!$expand) $expand = $this->expand;
+        if (!$expand) {
+            $expand = $this->expand;
+        }
+
+        /** @var ApiUrlRegistry $apiUrlRegistry */
+        $apiUrlRegistry = ApiUrlRegistry::instance();
+
         $res = $this->getSkladInstance()->getClient()->get(
-            ApiUrlRegistry::instance()->getByIdUrl($this->entityName, $id),
+            $apiUrlRegistry->getByIdUrl($this->entityName, $id),
             ($expand ? ['expand' => $expand->flatten()] : []),
             $this->requestOptions
         );
@@ -34,13 +41,17 @@ class EntityQuery extends AbstractQuery
      * @param $id
      * @param Expand|null $expand Deprecated, use withExpand()
      * @return AbstractEntity
-     * @throws \Throwable
+     * @throws Throwable
      */
-    public function bySyncId($id, Expand $expand = null)
+    public function bySyncId($id, Expand $expand = null): AbstractEntity
     {
-        if (!$expand) $expand = $this->expand;
+        if (!$expand) {
+            $expand = $this->expand;
+        }
+        /** @var ApiUrlRegistry $apiUrlRegistry */
+        $apiUrlRegistry = ApiUrlRegistry::instance();
         $res = $this->getSkladInstance()->getClient()->get(
-            ApiUrlRegistry::instance()->getBySyncIdUrl($this->entityName, $id),
+            $apiUrlRegistry->getBySyncIdUrl($this->entityName, $id),
             ($expand ? ['expand' => $expand->flatten()] : []),
             $this->requestOptions
         );

@@ -4,5 +4,5 @@ namespace TotalCRM\MoySklad\Entities\Documents\Invoices;
 
 class InvoiceOut extends AbstractInvoice
 {
-    public static $entityName = 'invoiceout';
+    public static string $entityName = 'invoiceout';
 }

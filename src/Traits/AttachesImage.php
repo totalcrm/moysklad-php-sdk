@@ -7,11 +7,12 @@ use TotalCRM\MoySklad\Entities\AbstractEntity;
 
 trait AttachesImage
 {
-    public function attachImage(ImageField $imageField)
+    /**
+     * @param ImageField $imageField
+     */
+    public function attachImage(ImageField $imageField): void
     {
-        /**
-         * @var AbstractEntity $this
-         */
+        /**  @var AbstractEntity $this */
         $this->fields->image = $imageField;
     }
 }

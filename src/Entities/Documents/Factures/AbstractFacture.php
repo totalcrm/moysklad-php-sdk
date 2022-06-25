@@ -7,5 +7,5 @@ use TotalCRM\MoySklad\Interfaces\DoesNotSupportMutationInterface;
 
 class AbstractFacture extends AbstractDocument implements DoesNotSupportMutationInterface
 {
-    public static $entityName = 'a_facture';
+    public static string $entityName = 'a_facture';
 }

@@ -5,7 +5,7 @@ namespace TotalCRM\MoySklad\Entities\Documents\Processings;
 
 class ProcessingPlanFolder extends AbstractProcessing
 {
-    public static $entityName = 'processingplanfolder';
+    public static string $entityName = 'processingplanfolder';
 
     public static function getFieldsRequiredForCreation()
     {

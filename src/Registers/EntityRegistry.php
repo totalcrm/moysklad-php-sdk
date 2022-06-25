@@ -28,83 +28,82 @@ use TotalCRM\MoySklad\Entities\Documents\Inventory;
 use TotalCRM\MoySklad\Entities\Documents\Movements\AbstractMovement;
 use TotalCRM\MoySklad\Entities\Documents\Movements\Demand;
 use TotalCRM\MoySklad\Entities\Documents\Movements\Enter;
-use TotalCRM\Entities\Documents\Movements\Loss;
-use TotalCRM\Entities\Documents\Movements\Supply;
-use TotalCRM\Entities\Documents\Movements\Move;
-use TotalCRM\Entities\Documents\Payments\PaymentOut;
-use TotalCRM\Entities\Documents\Payments\PaymentIn;
-use TotalCRM\Entities\Documents\Orders\AbstractOrder;
-use TotalCRM\Entities\Documents\Orders\CustomerOrder;
-use TotalCRM\Entities\Documents\Orders\PurchaseOrder;
-use TotalCRM\Entities\Documents\Positions\AbstractPosition;
-use TotalCRM\Entities\Documents\Positions\CustomerOrderPosition;
-use TotalCRM\Entities\Documents\Positions\InventoryPosition;
-use TotalCRM\Entities\Documents\Positions\DemandPosition;
-use TotalCRM\Entities\Documents\Positions\EnterPosition;
-use TotalCRM\Entities\Documents\Positions\LossPosition;
-use TotalCRM\Entities\Documents\Positions\MovePosition;
-use TotalCRM\Entities\Documents\Positions\SalesReturnPosition;
-use TotalCRM\Entities\Documents\Positions\PurchaseReturnPosition;
-use TotalCRM\Entities\Documents\Positions\SupplyPosition;
-use TotalCRM\Entities\Documents\PriceLists\PriceList;
-use TotalCRM\Entities\Documents\PriceLists\PriceListRow;
-use TotalCRM\Entities\Documents\Processings\ProcessingMaterial;
-use TotalCRM\Entities\Documents\Processings\ProcessingPlanFolder;
-use TotalCRM\Entities\Documents\Processings\ProcessingPlanMaterial;
-use TotalCRM\Entities\Documents\Processings\ProcessingPlanProduct;
-use TotalCRM\Entities\Documents\Processings\ProcessingProduct;
-use TotalCRM\Entities\Documents\Templates\CustomTemplate;
-use TotalCRM\Entities\Products\Components\AbstractComponent;
-use TotalCRM\Entities\Products\Components\BundleComponent;
-use TotalCRM\Entities\Documents\Processings\AbstractProcessing;
-use TotalCRM\Entities\Documents\Processings\Processing;
-use TotalCRM\Entities\Documents\Processings\ProcessingOrder;
-use TotalCRM\Entities\Documents\Processings\ProcessingPlan;
-use TotalCRM\Entities\Documents\Retail\AbstractRetail;
-use TotalCRM\Entities\Documents\Retail\RetailDemand;
-use TotalCRM\Entities\Documents\Retail\RetailSalesReturn;
-use TotalCRM\Entities\Documents\RetailDrawer\AbstractRetailDrawer;
-use TotalCRM\Entities\Documents\RetailDrawer\RetailDrawerCashIn;
-use TotalCRM\Entities\Documents\RetailDrawer\RetailDrawerCashOut;
-use TotalCRM\Entities\Documents\RetailShift;
-use TotalCRM\Entities\Documents\Returns\AbstractReturn;
-use TotalCRM\Entities\Documents\Returns\PurchaseReturn;
-use TotalCRM\Entities\Documents\Returns\SalesReturn;
-use TotalCRM\Entities\Employee;
-use TotalCRM\Entities\ExpenseItem;
-use TotalCRM\Entities\Folders\ProductFolder;
-use TotalCRM\Entities\Group;
-use TotalCRM\Entities\Misc\Attribute;
-use TotalCRM\Entities\Misc\Characteristics;
-use TotalCRM\Entities\Misc\CompanySettings;
-use TotalCRM\Entities\Misc\CustomEntity;
-use TotalCRM\Entities\Misc\Publication;
-use TotalCRM\Entities\Misc\State;
-use TotalCRM\Entities\Misc\Webhook;
-use TotalCRM\Entities\Organization;
-use TotalCRM\Entities\Products\AbstractProduct;
-use TotalCRM\Entities\Products\Bundle;
-use TotalCRM\Entities\Products\Consignment;
-use TotalCRM\Entities\Products\Product;
-use TotalCRM\Entities\Products\Service;
-use TotalCRM\Entities\Products\Variant;
-use TotalCRM\Entities\Project;
-use TotalCRM\Entities\RetailStore;
-use TotalCRM\Entities\Store;
-use TotalCRM\Entities\Uom;
-use TotalCRM\Entities\Bonustransaction;
-use TotalCRM\Entities\Bonusprogram;
-use TotalCRM\Utils\AbstractSingleton;
+use TotalCRM\MoySklad\Entities\Documents\Movements\Loss;
+use TotalCRM\MoySklad\Entities\Documents\Movements\Supply;
+use TotalCRM\MoySklad\Entities\Documents\Movements\Move;
+use TotalCRM\MoySklad\Entities\Documents\Payments\PaymentOut;
+use TotalCRM\MoySklad\Entities\Documents\Payments\PaymentIn;
+use TotalCRM\MoySklad\Entities\Documents\Orders\AbstractOrder;
+use TotalCRM\MoySklad\Entities\Documents\Orders\CustomerOrder;
+use TotalCRM\MoySklad\Entities\Documents\Orders\PurchaseOrder;
+use TotalCRM\MoySklad\Entities\Documents\Positions\AbstractPosition;
+use TotalCRM\MoySklad\Entities\Documents\Positions\CustomerOrderPosition;
+use TotalCRM\MoySklad\Entities\Documents\Positions\InventoryPosition;
+use TotalCRM\MoySklad\Entities\Documents\Positions\DemandPosition;
+use TotalCRM\MoySklad\Entities\Documents\Positions\EnterPosition;
+use TotalCRM\MoySklad\Entities\Documents\Positions\LossPosition;
+use TotalCRM\MoySklad\Entities\Documents\Positions\MovePosition;
+use TotalCRM\MoySklad\Entities\Documents\Positions\SalesReturnPosition;
+use TotalCRM\MoySklad\Entities\Documents\Positions\PurchaseReturnPosition;
+use TotalCRM\MoySklad\Entities\Documents\Positions\SupplyPosition;
+use TotalCRM\MoySklad\Entities\Documents\PriceLists\PriceList;
+use TotalCRM\MoySklad\Entities\Documents\PriceLists\PriceListRow;
+use TotalCRM\MoySklad\Entities\Documents\Processings\ProcessingMaterial;
+use TotalCRM\MoySklad\Entities\Documents\Processings\ProcessingPlanFolder;
+use TotalCRM\MoySklad\Entities\Documents\Processings\ProcessingPlanMaterial;
+use TotalCRM\MoySklad\Entities\Documents\Processings\ProcessingPlanProduct;
+use TotalCRM\MoySklad\Entities\Documents\Processings\ProcessingProduct;
+use TotalCRM\MoySklad\Entities\Documents\Templates\CustomTemplate;
+use TotalCRM\MoySklad\Entities\Products\Components\AbstractComponent;
+use TotalCRM\MoySklad\Entities\Products\Components\BundleComponent;
+use TotalCRM\MoySklad\Entities\Documents\Processings\AbstractProcessing;
+use TotalCRM\MoySklad\Entities\Documents\Processings\Processing;
+use TotalCRM\MoySklad\Entities\Documents\Processings\ProcessingOrder;
+use TotalCRM\MoySklad\Entities\Documents\Processings\ProcessingPlan;
+use TotalCRM\MoySklad\Entities\Documents\Retail\AbstractRetail;
+use TotalCRM\MoySklad\Entities\Documents\Retail\RetailDemand;
+use TotalCRM\MoySklad\Entities\Documents\Retail\RetailSalesReturn;
+use TotalCRM\MoySklad\Entities\Documents\RetailDrawer\AbstractRetailDrawer;
+use TotalCRM\MoySklad\Entities\Documents\RetailDrawer\RetailDrawerCashIn;
+use TotalCRM\MoySklad\Entities\Documents\RetailDrawer\RetailDrawerCashOut;
+use TotalCRM\MoySklad\Entities\Documents\RetailShift;
+use TotalCRM\MoySklad\Entities\Documents\Returns\AbstractReturn;
+use TotalCRM\MoySklad\Entities\Documents\Returns\PurchaseReturn;
+use TotalCRM\MoySklad\Entities\Documents\Returns\SalesReturn;
+use TotalCRM\MoySklad\Entities\Employee;
+use TotalCRM\MoySklad\Entities\ExpenseItem;
+use TotalCRM\MoySklad\Entities\Folders\ProductFolder;
+use TotalCRM\MoySklad\Entities\Group;
+use TotalCRM\MoySklad\Entities\Misc\Attribute;
+use TotalCRM\MoySklad\Entities\Misc\Characteristics;
+use TotalCRM\MoySklad\Entities\Misc\CompanySettings;
+use TotalCRM\MoySklad\Entities\Misc\CustomEntity;
+use TotalCRM\MoySklad\Entities\Misc\Publication;
+use TotalCRM\MoySklad\Entities\Misc\State;
+use TotalCRM\MoySklad\Entities\Misc\Webhook;
+use TotalCRM\MoySklad\Entities\Organization;
+use TotalCRM\MoySklad\Entities\Products\AbstractProduct;
+use TotalCRM\MoySklad\Entities\Products\Bundle;
+use TotalCRM\MoySklad\Entities\Products\Consignment;
+use TotalCRM\MoySklad\Entities\Products\Product;
+use TotalCRM\MoySklad\Entities\Products\Service;
+use TotalCRM\MoySklad\Entities\Products\Variant;
+use TotalCRM\MoySklad\Entities\Project;
+use TotalCRM\MoySklad\Entities\RetailStore;
+use TotalCRM\MoySklad\Entities\Store;
+use TotalCRM\MoySklad\Entities\Uom;
+use TotalCRM\MoySklad\Entities\Bonustransaction;
+use TotalCRM\MoySklad\Entities\Bonusprogram;
+use TotalCRM\MoySklad\Utils\AbstractSingleton;
 
 /**
- * Map of entity name => representing class
  * Class EntityRegistry
- * @package MoySklad\Registries
+ * @package TotalCRM\MoySklad\Registers
  */
 class EntityRegistry extends AbstractSingleton
 {
     protected static $instance = null;
-    public $entities = [
+    public array $entities = [
         AbstractEntity::class,
         AbstractDocument::class,
         PaymentIn::class,
@@ -198,7 +197,7 @@ class EntityRegistry extends AbstractSingleton
         Bonustransaction::class,
         Bonusprogram::class
     ];
-    public $entityNames = [];
+    public array $entityNames = [];
 
     protected function __construct()
     {
@@ -207,7 +206,7 @@ class EntityRegistry extends AbstractSingleton
         }
     }
 
-    public function bootEntities()
+    public function bootEntities(): void
     {
         foreach ($this->entities as $e) {
             $e::boot();

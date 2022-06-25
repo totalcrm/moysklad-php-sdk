@@ -2,24 +2,27 @@
 
 namespace TotalCRM\MoySklad\Entities\Audit;
 
-use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
 use TotalCRM\MoySklad\MoySklad;
+use TotalCRM\MoySklad\Components\Query\EntityQuery;
+use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
 use TotalCRM\MoySklad\Registers\ApiUrlRegistry;
+use Exception;
 
+/**
+ * Class Audit
+ * @package TotalCRM\MoySklad\Entities\Audit
+ */
 class Audit extends AbstractAudit
 {
-    public static $entityName = "audit";
-    /**
-     * @var string $customQueryUrl
-     */
-    protected static $customQueryUrl;
+    public static string $entityName = "audit";
+    protected static ?string $customQueryUrl;
 
     /**
      * @param MoySklad $skladInstance
      * @return string
      * @throws \Throwable
      */
-    public static function getFilters(MoySklad &$skladInstance)
+    public static function getFilters(MoySklad &$skladInstance): string
     {
         return (object)$skladInstance->getClient()->get(
             ApiUrlRegistry::instance()->getAuditFiltersUrl()
@@ -29,12 +32,12 @@ class Audit extends AbstractAudit
     /**
      * @param MoySklad $skladInstance
      * @param QuerySpecs|null $querySpecs
-     * @return \MoySklad\Components\Query\EntityQuery
+     * @return EntityQuery
+     * @throws Exception
      */
     public static function query(MoySklad &$skladInstance, QuerySpecs $querySpecs = null)
     {
-        $query = parent::query($skladInstance, $querySpecs)
+        return parent::query($skladInstance, $querySpecs)
             ->setCustomQueryUrl(ApiUrlRegistry::instance()->getAuditUrl());
-        return $query;
     }
 }

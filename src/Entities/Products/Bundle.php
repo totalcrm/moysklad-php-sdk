@@ -7,6 +7,5 @@ use TotalCRM\MoySklad\Traits\RequiresOnlyNameForCreation;
 class Bundle extends AbstractProduct
 {
     use RequiresOnlyNameForCreation;
-    public static
-        $entityName = 'bundle';
+    public static string $entityName = 'bundle';
 }

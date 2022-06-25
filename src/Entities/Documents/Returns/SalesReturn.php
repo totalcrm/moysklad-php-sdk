@@ -8,7 +8,7 @@ use TotalCRM\MoySklad\Entities\Store;
 
 class SalesReturn extends AbstractReturn
 {
-    public static $entityName = 'salesreturn';
+    public static string $entityName = 'salesreturn';
 
     public static function getFieldsRequiredForCreation()
     {

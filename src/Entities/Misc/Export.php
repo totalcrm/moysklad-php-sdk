@@ -6,7 +6,7 @@ use TotalCRM\MoySklad\Entities\AbstractEntity;
 
 class Export extends AbstractEntity
 {
-    public static $entityName = 'export';
+    public static string $entityName = 'export';
 
     public static function getFieldsRequiredForCreation()
     {

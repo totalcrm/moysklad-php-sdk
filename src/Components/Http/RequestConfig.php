@@ -2,6 +2,13 @@
 
 namespace TotalCRM\MoySklad\Components\Http;
 
+use Exception;
+use RuntimeException;
+
+/**
+ * Class RequestConfig
+ * @package TotalCRM\MoySklad\Components\Http
+ */
 class RequestConfig
 {
     /**
@@ -14,7 +21,7 @@ class RequestConfig
         "followRedirects" => true
     ];
 
-    public function __construct($fields = [])
+    public function __construct(?array $fields = [])
     {
         $this->fields = array_merge($this->fields, $fields);
     }
@@ -22,7 +29,7 @@ class RequestConfig
     /**
      * @param $key
      * @return mixed
-     * @throws \Exception
+     * @throws Exception
      */
     public function get($key)
     {
@@ -33,9 +40,9 @@ class RequestConfig
     /**
      * @param $key
      * @param $value
-     * @throws \Exception
+     * @throws Exception
      */
-    public function set($key, $value)
+    public function set($key, $value): void
     {
         $this->checkKey($key);
         $this->fields[$key] = $value;
@@ -43,10 +50,12 @@ class RequestConfig
 
     /**
      * @param $key
-     * @throws \Exception
+     * @throws Exception
      */
-    private function checkKey($key)
+    private function checkKey($key): void
     {
-        if (!isset($this->fields[$key])) throw new \Exception("Unknown option '$key'");
+        if (!isset($this->fields[$key])) {
+            throw new RuntimeException("Unknown option '$key'");
+        }
     }
 }

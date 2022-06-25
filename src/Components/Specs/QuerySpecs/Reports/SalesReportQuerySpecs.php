@@ -2,14 +2,20 @@
 
 namespace TotalCRM\MoySklad\Components\Specs\QuerySpecs\Reports;
 
-
 use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
 
+/**
+ * Class SalesReportQuerySpecs
+ * @package TotalCRM\MoySklad\Components\Specs\QuerySpecs\Reports
+ */
 class SalesReportQuerySpecs extends QuerySpecs
 {
-    protected static $cachedDefaultSpecs = null;
+    protected static $cachedDefaultSpecs;
 
-    public function getDefaults()
+    /**
+     * @return array
+     */
+    public function getDefaults(): array
     {
         $res = parent::getDefaults();
         $res['product.id'] = null;

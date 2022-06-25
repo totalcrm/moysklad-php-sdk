@@ -4,5 +4,5 @@ namespace TotalCRM\MoySklad\Entities;
 
 class Contract extends AbstractEntity
 {
-    public static $entityName = 'contract';
+    public static string $entityName = 'contract';
 }

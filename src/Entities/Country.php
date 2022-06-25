@@ -7,5 +7,5 @@ use TotalCRM\MoySklad\Traits\RequiresOnlyNameForCreation;
 class Country extends AbstractEntity
 {
     use RequiresOnlyNameForCreation;
-    public static $entityName = 'country';
+    public static string $entityName = 'country';
 }
