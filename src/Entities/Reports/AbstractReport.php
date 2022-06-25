@@ -2,13 +2,8 @@
 
 namespace TotalCRM\MoySklad\Entities\Reports;
 
-<<<<<<< HEAD
 use TotalCRM\MoySklad\Components\FilterQuery;
 use TotalCRM\MoySklad\Exceptions\UnknownSpecException;
-use TotalCRM\MoySklad\Lists\EntityList;
-=======
-use TotalCRM\MoySklad\Exceptions\UnknownSpecException;
->>>>>>> 4db1a0840be5891584390f55fcaf7eeb9631a8e2
 use TotalCRM\MoySklad\MoySklad;
 use TotalCRM\MoySklad\Components\Specs\EmptySpecs;
 use TotalCRM\MoySklad\Components\Specs\QuerySpecs\QuerySpecs;
@@ -27,10 +22,7 @@ abstract class AbstractReport extends AbstractEntity implements DoesNotSupportMu
      * @param MoySklad $sklad
      * @param null $param
      * @param QuerySpecs|null $specs
-<<<<<<< HEAD
-     * @param FilterQuery|null $filter
-=======
->>>>>>> 4db1a0840be5891584390f55fcaf7eeb9631a8e2
+     * @param FilterQuery|null $filterQuery
      * @return stdClass|string
      * @throws UnknownSpecException
      */
@@ -48,7 +40,6 @@ abstract class AbstractReport extends AbstractEntity implements DoesNotSupportMu
             $url = $apiUrlRegistryInstance->getReportWithParamUrl(static::$reportName, $param);
         }
 
-<<<<<<< HEAD
         if ($filterQuery) {
             $query = array_merge($specs->toArray(), [
                 "filter" => $filterQuery->getRaw()
@@ -57,10 +48,6 @@ abstract class AbstractReport extends AbstractEntity implements DoesNotSupportMu
 
         try {
             return $sklad->getClient()->get($url, $query ?? $specs->toArray());
-=======
-        try {
-            return $sklad->getClient()->get($url, $specs->toArray());
->>>>>>> 4db1a0840be5891584390f55fcaf7eeb9631a8e2
         } catch (Throwable $e) {
         }
     }
