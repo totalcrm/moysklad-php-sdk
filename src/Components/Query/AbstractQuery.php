@@ -101,6 +101,18 @@ abstract class AbstractQuery
     }
 
     /**
+     * Get array of entities
+     * @return array|null
+     * @throws Exception
+     */
+    public function getArray(): ?array
+    {
+        $this->attachExpand($this->querySpecs);
+        $query = $this->querySpecs->toArray();
+        return $this->getSkladInstance()->getClient()->get($this->getQueryUrl(), $query, $this->requestOptions);
+    }
+
+    /**
      * Get list of entities
      * @return EntityList
      * @throws Exception

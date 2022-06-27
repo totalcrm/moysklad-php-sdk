@@ -81,6 +81,7 @@ use TotalCRM\MoySklad\Entities\Misc\CustomEntity;
 use TotalCRM\MoySklad\Entities\Misc\Publication;
 use TotalCRM\MoySklad\Entities\Misc\State;
 use TotalCRM\MoySklad\Entities\Misc\Webhook;
+use TotalCRM\MoySklad\Entities\Misc\PriceType;
 use TotalCRM\MoySklad\Entities\Organization;
 use TotalCRM\MoySklad\Entities\Products\AbstractProduct;
 use TotalCRM\MoySklad\Entities\Products\Bundle;
@@ -186,6 +187,7 @@ class EntityRegistry extends AbstractSingleton
         ProcessingOrder::class,
         ProcessingPlan::class,
         ProcessingPlanFolder::class,
+        PriceType::class,
         PriceList::class,
         PriceListRow::class,
         Audit::class,
