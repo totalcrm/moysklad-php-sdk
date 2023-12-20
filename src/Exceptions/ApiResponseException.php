@@ -18,9 +18,9 @@ class ApiResponseException extends RequestFailedException
     {
         parent::__construct($request, $response);
         $error = is_array($response) ? $response[0]->errors[0] : $response->errors[0];
-        $this->code = $error->code;
-        $this->errorText = $error->error;
-        $this->moreInfo = $error->moreInfo;
+        $this->code = isset($error->code) ? $error->code : null;
+        $this->errorText = isset($error->error) ? $error->error : null;
+        $this->moreInfo = isset($error->moreInfo) ? $error->moreInfo : null;
     }
 
     public function getApiCode()
