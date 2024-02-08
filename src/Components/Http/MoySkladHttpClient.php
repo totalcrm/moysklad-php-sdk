@@ -30,13 +30,13 @@ class MoySkladHttpClient
     private ?int $preRequestSleepTime = 200;
 
     private ?string
-        $posEndpoint = "https://online.moysklad.ru/api/posap/1.0/",
+        $posEndpoint = "https://api.moysklad.ru/api/posap/1.0/",
         $login,
         $password,
         $posToken,
         $endpoint;
 
-    public function __construct($login, $password, $posToken, $subdomain = "online")
+    public function __construct($login, $password, $posToken, $subdomain = "api")
     {
         $this->login = $login;
         $this->password = $password;
