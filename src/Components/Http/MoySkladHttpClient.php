@@ -180,7 +180,9 @@ class MoySkladHttpClient
         }
 
         $headers = [
-            "Authorization" => "Basic " . base64_encode($this->login . ':' . $password)
+            "Authorization" => "Basic " . base64_encode($this->login . ':' . $password),
+            'Accept' => 'application/json;charset=utf-8',
+            "Accept-Encoding" => "gzip",
         ];
         $config = [
             "base_uri" => $endpoint,
@@ -237,6 +239,9 @@ class MoySkladHttpClient
                     }
 
                     $result = json_decode($res->getBody(), false, 512, JSON_THROW_ON_ERROR);
+                    if (empty($result) and $res->getHeader('Content-Encoding') == 'gzip') {
+                        $result = json_decode(gzdecode($res->getBody()), false, 512, JSON_THROW_ON_ERROR);
+                    }
                     if (is_null($result) === false) {
                         $reqLog['res'] = $result;
                         RequestLog::replaceLast($reqLog);
