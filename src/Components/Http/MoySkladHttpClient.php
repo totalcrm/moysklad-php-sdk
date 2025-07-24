@@ -2,6 +2,7 @@
 
 namespace TotalCRM\MoySklad\Components\Http;
 
+use http\Exception\RuntimeException;
 use Throwable;
 use TotalCRM\MoySklad\Exceptions\ApiResponseException;
 use TotalCRM\MoySklad\Exceptions\PosTokenException;
@@ -125,7 +126,13 @@ class MoySkladHttpClient
     public function getRaw($link, $options): ResponseInterface
     {
         if (empty($options['headers']['Authorization'])) {
-            $options['headers']['Authorization'] = "Basic " . base64_encode($this->login . ':' . $this->password);
+            if ($this->login && $this->password) {
+                $options['headers']['Authorization'] = "Basic " . base64_encode($this->login . ':' . $this->password);
+            } else if ($this->login) {
+                $options['headers']['Authorization'] = "Bearer " . $this->login;
+            } else {
+                throw new RuntimeException('Error Authorization settings');
+            }
         }
 
         $client = new Client();
@@ -179,11 +186,21 @@ class MoySkladHttpClient
             $endpoint = $this->endpoint;
         }
 
-        $headers = [
-            "Authorization" => "Basic " . base64_encode($this->login . ':' . $password),
-            'Accept' => 'application/json;charset=utf-8',
-            "Accept-Encoding" => "gzip",
-        ];
+        if ($this->login && $this->password) {
+            $headers = [
+                "Authorization" => "Basic " . base64_encode($this->login . ':' . $password),
+                'Accept' => 'application/json;charset=utf-8',
+                "Accept-Encoding" => "gzip",
+            ];
+        } else if ($this->login) {
+            $headers = [
+                "Authorization" => "Bearer " . $this->login,
+                'Accept' => 'application/json;charset=utf-8',
+                "Accept-Encoding" => "gzip",
+            ];
+        } else {
+            throw new RuntimeException('Error Authorization settings');
+        }
         $config = [
             "base_uri" => $endpoint,
             "headers" => $headers
