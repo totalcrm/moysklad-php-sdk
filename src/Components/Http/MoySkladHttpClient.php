@@ -199,7 +199,7 @@ class MoySkladHttpClient
                 "Accept-Encoding" => "gzip",
             ];
         } else {
-            throw new RuntimeException('Error Authorization settings');
+            throw new \RuntimeException('Error Authorization settings');
         }
         $config = [
             "base_uri" => $endpoint,
